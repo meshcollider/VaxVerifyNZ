@@ -4,14 +4,12 @@ import { StyleSheet, Button, TouchableOpacity } from 'react-native';
 import { BarCodeScanner } from 'expo-barcode-scanner';
 import BarcodeMask from 'react-native-barcode-mask';
 
-import EditScreenInfo from '../components/EditScreenInfo';
 import { Text, View } from '../components/Themed';
 import { RootTabScreenProps } from '../types';
 
 export default function ScannerScreen({ navigation }: RootTabScreenProps<'Scanner'>) {
 
   const [hasPermission, setHasPermission] = React.useState(null);
-  const [scanned, setScanned] = React.useState(false);
 
  React.useEffect(() => {
     (async () => {
@@ -21,8 +19,8 @@ export default function ScannerScreen({ navigation }: RootTabScreenProps<'Scanne
   }, []);
 
   const handleBarCodeScanned = ({ type, data }) => {
-    setScanned(true);
-    alert(`Bar code with type ${type} and data ${data} has been scanned!`);
+    //alert(`Bar code with type ${type} and data ${data} has been scanned!`);
+    navigation.navigate('ScanResult', { 'data': data });
   };
 
   if (hasPermission === null) {
@@ -35,20 +33,20 @@ export default function ScannerScreen({ navigation }: RootTabScreenProps<'Scanne
  return (
     <View style={styles.container}>
       <Text style={styles.title}>Scan NZ Vaccine Pass</Text>
-      <View style={styles.separator} lightColor="#eee" darkColor="rgba(255,255,255,0.1)" />
-      <BarCodeScanner   onBarCodeScanned={scanned ? undefined : handleBarCodeScanned}
-                        barCodeTypes={[BarCodeScanner.Constants.BarCodeType.qr]}
-                        style={StyleSheet.absoluteFillObject} >
-        <View
-            style={{
-                flex: 1,
-                backgroundColor: 'transparent',
-                flexDirection: 'row',
-            }}>
-        </View>
-      <BarcodeMask edgeColor="#62B1F6" showAnimatedLine={false}></BarcodeMask>
-      {scanned && <Button title={'Tap to Scan Again'} onPress={() => setScanned(false)} />}
-      </BarCodeScanner>
+      <View style={styles.scannerBox}>
+        <BarCodeScanner   onBarCodeScanned={handleBarCodeScanned}
+                          barCodeTypes={[BarCodeScanner.Constants.BarCodeType.qr]}
+                          style={StyleSheet.absoluteFillObject} >
+          <View
+              style={{
+                  flex: 1,
+                  backgroundColor: 'transparent',
+                  flexDirection: 'row',
+              }}>
+          </View>
+        <BarcodeMask edgeColor="#62B1F6" showAnimatedLine={false}></BarcodeMask>
+        </BarCodeScanner>
+      </View>
     </View>
   );
 }
@@ -56,10 +54,18 @@ export default function ScannerScreen({ navigation }: RootTabScreenProps<'Scanne
 const styles = StyleSheet.create({
   container: {
     flex: 1,
+    height: '100%',
+    width: '100%',
     alignItems: 'center',
     justifyContent: 'center',
   },
+  scannerBox: {
+    width: '100%',
+    flexGrow: 1,
+    alignItems: 'center',
+  },
   title: {
+    padding: 10,
     fontSize: 20,
     fontWeight: 'bold',
   },

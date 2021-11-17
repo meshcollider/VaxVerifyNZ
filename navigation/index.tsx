@@ -15,6 +15,7 @@ import useColorScheme from '../hooks/useColorScheme';
 import AboutScreen from '../screens/AboutScreen';
 import NotFoundScreen from '../screens/NotFoundScreen';
 import ScannerScreen from '../screens/ScannerScreen';
+import ScanResultScreen from '../screens/ScanResultScreen';
 import OptionsScreen from '../screens/OptionsScreen';
 import { RootStackParamList, RootTabParamList, RootTabScreenProps } from '../types';
 import LinkingConfiguration from './LinkingConfiguration';
@@ -42,6 +43,9 @@ function RootNavigator() {
       <Stack.Screen name="NotFound" component={NotFoundScreen} options={{ title: 'Oops!' }} />
       <Stack.Group screenOptions={{ presentation: 'modal' }}>
         <Stack.Screen name="About" component={AboutScreen} />
+      </Stack.Group>
+      <Stack.Group screenOptions={{ presentation: 'modal' }}>
+        <Stack.Screen name="ScanResult" component={ScanResultScreen} />
       </Stack.Group>
     </Stack.Navigator>
   );
