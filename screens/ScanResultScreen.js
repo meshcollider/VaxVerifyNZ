@@ -1,10 +1,34 @@
 import { StatusBar } from 'expo-status-bar';
 import * as React from 'react';
-import { Platform, StyleSheet, View, Text, ActivityIndicator } from 'react-native';
+import { Platform, StyleSheet, View, Text, ActivityIndicator, Button, Alert } from 'react-native';
 
 import '../config/polyfills';
 
 import { verifyPassURI } from "@vaxxnz/nzcp";
+
+
+
+
+function showQRData(data) {
+  Alert.alert("QR code data:", data);
+}
+
+function ErrorMessage(props) {
+  const section = props.violates.section;
+  const message = props.violates.message;
+  const data = props.data;
+  
+  return (
+      <>
+      <Text>{section === '4.4' || section === '4.5' ?
+             "QR code is not a valid NZ Covid Pass" :
+             message + " (Section: " + section + ")" }
+      </Text>
+      <View style={styles.separator} lightColor="#eee" darkColor="rgba(255,255,255,0.1)" />
+      <Button title='Show QR Data' onPress={showQRData.bind(this, data)} />
+      </>
+  )
+}
 
 export default function ScanResultScreen({route, navigation}) {
   const { data } = route.params;
@@ -32,8 +56,7 @@ export default function ScanResultScreen({route, navigation}) {
     return ( 
       <View style={styles.container}>
         <Text style={styles.title}>Invalid Code</Text>
-        <Text>{data}</Text>
-        <Text>{JSON.stringify(result.violates)}</Text>
+        <ErrorMessage violates={result.violates} data={data}  />
         {/* Use a light status bar on iOS to account for the black space above the modal */}
         <StatusBar style={Platform.OS === 'ios' ? 'light' : 'auto'} />
       </View>
@@ -41,11 +64,13 @@ export default function ScanResultScreen({route, navigation}) {
   }
 
 
+  const subject = result.credentialSubject;
   return (
     <View style={styles.container}>
       <Text style={styles.title}>Success</Text>
-      <Text>{data}</Text>
-      <Text>{JSON.stringify(result.credentialSubject)}</Text>
+      <Text>Given name: {subject.givenName}</Text>
+      <Text>Family name: {subject.familyName}</Text>
+      <Text>Date of birth: {subject.dob}</Text>
       {/* Use a light status bar on iOS to account for the black space above the modal */}
       <StatusBar style={Platform.OS === 'ios' ? 'light' : 'auto'} />
     </View>
