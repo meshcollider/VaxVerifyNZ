@@ -1,13 +1,10 @@
 import * as React from 'react';
-import { StyleSheet, Button, TouchableOpacity } from 'react-native';
+import { StyleSheet, View, Text, Button, TouchableOpacity } from 'react-native';
 
 import { BarCodeScanner } from 'expo-barcode-scanner';
 import BarcodeMask from 'react-native-barcode-mask';
 
-import { Text, View } from '../components/Themed';
-import { RootTabScreenProps } from '../types';
-
-export default function ScannerScreen({ navigation }: RootTabScreenProps<'Scanner'>) {
+export default function ScannerScreen({ navigation }) {
 
   const [hasPermission, setHasPermission] = React.useState(null);
 
@@ -36,7 +33,7 @@ export default function ScannerScreen({ navigation }: RootTabScreenProps<'Scanne
       <View style={styles.scannerBox}>
         <BarCodeScanner   onBarCodeScanned={handleBarCodeScanned}
                           barCodeTypes={[BarCodeScanner.Constants.BarCodeType.qr]}
-                          style={StyleSheet.absoluteFillObject} >
+                          style={StyleSheet.absoluteFillObject}>
           <View
               style={{
                   flex: 1,

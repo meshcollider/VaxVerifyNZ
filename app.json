@@ -20,7 +20,7 @@
     ],
     "ios": {
       "supportsTablet": true,
-      "bundleIdentifier": "com.meshcollider.varverifynz",
+      "bundleIdentifier": "com.meshcollider.vaxverifynz",
       "buildNumber": "1.0.0"
     },
     "android": {

@@ -10,9 +10,6 @@
     "eject": "expo eject",
     "test": "jest --watchAll"
   },
-  "jest": {
-    "preset": "jest-expo"
-  },
   "dependencies": {
     "@expo/vector-icons": "^12.0.0",
     "@react-navigation/bottom-tabs": "^6.0.5",
@@ -36,11 +33,7 @@
     "react-native-web": "~0.13.12"
   },
   "devDependencies": {
-    "@babel/core": "~7.9.0",
-    "@types/react": "~16.9.35",
-    "@types/react-native": "~0.63.2",
-    "jest-expo": "^42.0.0",
-    "typescript": "~4.0.0"
+    "@babel/core": "~7.9.0"
   },
   "private": true
 }
