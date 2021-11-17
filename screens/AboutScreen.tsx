@@ -8,10 +8,11 @@ import { Text, View } from '../components/Themed';
 export default function ModalScreen() {
   return (
     <View style={styles.container}>
-      <Text style={styles.title}>Modal</Text>
+      <Text style={styles.title}>About Vax Verify NZ</Text>
       <View style={styles.separator} lightColor="#eee" darkColor="rgba(255,255,255,0.1)" />
-      <EditScreenInfo path="/screens/ModalScreen.tsx" />
-
+      <Text style={styles.content}>Unofficial, open source NZ Vaccination Passport verification app.
+      
+      {'\n\n'}Developed by Samuel Dobson and Joshua Soong</Text>
       {/* Use a light status bar on iOS to account for the black space above the modal */}
       <StatusBar style={Platform.OS === 'ios' ? 'light' : 'auto'} />
     </View>
@@ -23,6 +24,10 @@ const styles = StyleSheet.create({
     flex: 1,
     alignItems: 'center',
     justifyContent: 'center',
+  },
+  content: {
+    width: '90%',
+    textAlign: 'center',
   },
   title: {
     fontSize: 20,
