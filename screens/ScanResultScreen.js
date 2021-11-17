@@ -28,12 +28,24 @@ export default function ScanResultScreen({route, navigation}) {
     );
   }
 
+  if (!result.success) {
+    return ( 
+      <View style={styles.container}>
+        <Text style={styles.title}>Invalid Code</Text>
+        <Text>{data}</Text>
+        <Text>{JSON.stringify(result.violates)}</Text>
+        {/* Use a light status bar on iOS to account for the black space above the modal */}
+        <StatusBar style={Platform.OS === 'ios' ? 'light' : 'auto'} />
+      </View>
+    )
+  }
+
+
   return (
     <View style={styles.container}>
-      <Text style={styles.title}>Result</Text>
-      <View style={styles.separator} lightColor="#eee" darkColor="rgba(255,255,255,0.1)" />
+      <Text style={styles.title}>Success</Text>
       <Text>{data}</Text>
-      <Text>{result.credentialSubject.givenName}</Text>
+      <Text>{JSON.stringify(result.credentialSubject)}</Text>
       {/* Use a light status bar on iOS to account for the black space above the modal */}
       <StatusBar style={Platform.OS === 'ios' ? 'light' : 'auto'} />
     </View>
