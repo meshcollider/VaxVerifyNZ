@@ -8,7 +8,7 @@ export default function ScannerScreen({ navigation }) {
 
   const [hasPermission, setHasPermission] = React.useState(null);
 
- React.useEffect(() => {
+  React.useEffect(() => {
     (async () => {
       const { status } = await BarCodeScanner.requestPermissionsAsync();
       setHasPermission(status === 'granted');
@@ -27,7 +27,7 @@ export default function ScannerScreen({ navigation }) {
     return <Text>Access to camera is required to scan vaccination passport QR codes.</Text>;
   }
 
- return (
+  return (
     <View style={styles.container}>
       <Text style={styles.title}>Scan NZ Vaccine Pass</Text>
       <View style={styles.scannerBox}>
