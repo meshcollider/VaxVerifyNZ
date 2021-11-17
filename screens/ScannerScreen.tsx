@@ -1,7 +1,8 @@
 import * as React from 'react';
-import { StyleSheet, Button } from 'react-native';
+import { StyleSheet, Button, TouchableOpacity } from 'react-native';
 
 import { BarCodeScanner } from 'expo-barcode-scanner';
+import BarcodeMask from 'react-native-barcode-mask';
 
 import EditScreenInfo from '../components/EditScreenInfo';
 import { Text, View } from '../components/Themed';
@@ -35,11 +36,19 @@ export default function ScannerScreen({ navigation }: RootTabScreenProps<'Scanne
     <View style={styles.container}>
       <Text style={styles.title}>Scan NZ Vaccine Pass</Text>
       <View style={styles.separator} lightColor="#eee" darkColor="rgba(255,255,255,0.1)" />
-      <BarCodeScanner
-        onBarCodeScanned={scanned ? undefined : handleBarCodeScanned}
-        style={StyleSheet.absoluteFillObject}
-      />
+      <BarCodeScanner   onBarCodeScanned={scanned ? undefined : handleBarCodeScanned}
+                        barCodeTypes={[BarCodeScanner.Constants.BarCodeType.qr]}
+                        style={StyleSheet.absoluteFillObject} >
+        <View
+            style={{
+                flex: 1,
+                backgroundColor: 'transparent',
+                flexDirection: 'row',
+            }}>
+        </View>
+      <BarcodeMask edgeColor="#62B1F6" showAnimatedLine={false}></BarcodeMask>
       {scanned && <Button title={'Tap to Scan Again'} onPress={() => setScanned(false)} />}
+      </BarCodeScanner>
     </View>
   );
 }
