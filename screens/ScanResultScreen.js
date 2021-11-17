@@ -15,8 +15,8 @@ export default function ScanResultScreen({route, navigation}) {
   React.useEffect(() => {
     (async () => {
       const result = await verifyPassURI(data);
-//      setResult(result);
-//      setProcessed(true);
+      setResult(result);
+      setProcessed(true);
     })();
   }, []); 
 
@@ -33,7 +33,7 @@ export default function ScanResultScreen({route, navigation}) {
       <Text style={styles.title}>Result</Text>
       <View style={styles.separator} lightColor="#eee" darkColor="rgba(255,255,255,0.1)" />
       <Text>{data}</Text>
-      <Text>{result}</Text>
+      <Text>{result.credentialSubject.givenName}</Text>
       {/* Use a light status bar on iOS to account for the black space above the modal */}
       <StatusBar style={Platform.OS === 'ios' ? 'light' : 'auto'} />
     </View>

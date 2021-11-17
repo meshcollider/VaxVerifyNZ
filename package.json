@@ -17,6 +17,8 @@
     "@react-navigation/native-stack": "^6.1.0",
     "@vaxxnz/nzcp": "^0.1.5",
     "big-integer": "^1.6.51",
+    "buffer": "^6.0.3",
+    "events": "^3.3.0",
     "expo": "^42.0.0",
     "expo-asset": "~8.3.3",
     "expo-barcode-scanner": "~10.2.2",
@@ -26,6 +28,7 @@
     "expo-splash-screen": "~0.11.2",
     "expo-status-bar": "~1.0.4",
     "expo-web-browser": "~9.2.0",
+    "process": "^0.11.10",
     "react": "16.13.1",
     "react-dom": "16.13.1",
     "react-native": "https://github.com/expo/react-native/archive/sdk-42.0.0.tar.gz",
@@ -34,6 +37,7 @@
     "react-native-screens": "~3.4.0",
     "react-native-util": "^1.0.2",
     "react-native-web": "~0.13.12",
+    "stream-browserify": "^3.0.0",
     "text-encoding-polyfill": "^0.6.7"
   },
   "devDependencies": {

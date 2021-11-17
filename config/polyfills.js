@@ -1,4 +1,5 @@
 import "text-encoding-polyfill";
+global.Buffer = global.Buffer || require("buffer").Buffer
 
 if (typeof BigInt === 'undefined') {
   const bi = require('big-integer')
@@ -15,4 +16,10 @@ if (typeof BigInt === 'undefined') {
   }
 
   global.BigInt = myBigInt;
+
+  if (process === undefined) {
+		process = require("process")
+  } else if (process.nextTick === undefined) {
+	  process.nextTick = require("process").nextTick
+  }
 }
