@@ -2,6 +2,8 @@ import { StatusBar } from 'expo-status-bar';
 import * as React from 'react';
 import { Platform, StyleSheet, View, Text, ActivityIndicator } from 'react-native';
 
+import '../config/polyfills';
+
 import { verifyPassURI } from "@vaxxnz/nzcp";
 
 export default function ScanResultScreen({route, navigation}) {
