@@ -37,7 +37,6 @@ export default function ScannerScreen({ navigation }) {
             let distances = {}
             let realRatios = {}
             let minDistance = null
-            alert(ratios)
             for (const ratio of ratios) {
                 const parts = ratio.split(':')
                 const realRatio = parseInt(parts[0]) / parseInt(parts[1])
@@ -52,16 +51,6 @@ export default function ScannerScreen({ navigation }) {
                         minDistance = ratio
                     }
                 }
-                // ratio can't be taller than screen, so we don't want an abs()
-                //const distance = Math.abs(screenRatio - realRatio)
-                //distances[ratio] = realRatio
-                //if (minDistance == null) {
-                //    minDistance = ratio
-                //} else {
-                //    if (distance >= 0 && distance < distances[minDistance]) {
-                //        minDistance = ratio
-                //    }
-                //}
             }
             desiredRatio = minDistance
             const remainder = Math.floor((height - realRatios[desiredRatio] * width) / 2)
