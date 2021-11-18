@@ -126,10 +126,6 @@ export default function ScanCamera(props) {
             </View>
 
             <View
-                onBarCodeScanned={props.resultHandler}
-                type={cameraType}
-                barCodeTypes={[BarCodeScanner.Constants.BarCodeType.qr]}
-                flashMode={flashMode}
                 style={[
                     StyleSheet.absoluteFillObject,
                     { marginTop: 1.5 * imagePadding, marginBottom: 0.5 * imagePadding },
