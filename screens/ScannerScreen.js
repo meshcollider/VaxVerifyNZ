@@ -1,9 +1,17 @@
-import * as React from "react"
-import { StyleSheet, View, SafeAreaView, Text, Button, TouchableOpacity, Dimensions } from "react-native"
+import * as React from 'react'
+import {
+    StyleSheet,
+    View,
+    SafeAreaView,
+    Text,
+    Button,
+    TouchableOpacity,
+    Dimensions,
+} from 'react-native'
 
-import { BarCodeScanner } from "expo-barcode-scanner"
-import BarcodeMask from "react-native-barcode-mask"
-import { MaterialIcons } from "@expo/vector-icons"
+import { BarCodeScanner } from 'expo-barcode-scanner'
+import BarcodeMask from 'react-native-barcode-mask'
+import { MaterialIcons } from '@expo/vector-icons'
 
 export default function ScannerScreen({ navigation }) {
     const [hasPermission, setHasPermission] = React.useState(null)
@@ -12,31 +20,35 @@ export default function ScannerScreen({ navigation }) {
     React.useEffect(() => {
         ;(async () => {
             const { status } = await BarCodeScanner.requestPermissionsAsync()
-            setHasPermission(status === "granted")
+            setHasPermission(status === 'granted')
         })()
     }, [])
 
     const handleBarCodeScanned = ({ type, data }) => {
         //alert(`Bar code with type ${type} and data ${data} has been scanned!`);
-        navigation.navigate("ScanResult", { data: data })
+        navigation.navigate('ScanResult', { data: data })
     }
 
     if (hasPermission === null) {
         return (
             <SafeAreaView style={styles.container}>
-                <Text style={styles.text}>Please allow access to camera to scan vaccination passport QR codes.</Text>
+                <Text style={styles.text}>
+                    Please allow access to camera to scan vaccination passport QR codes.
+                </Text>
             </SafeAreaView>
         )
     }
     if (hasPermission === false) {
         return (
             <SafeAreaView style={styles.container}>
-                <Text style={styles.text}>Access to camera is required to scan vaccination passport QR codes.</Text>
+                <Text style={styles.text}>
+                    Access to camera is required to scan vaccination passport QR codes.
+                </Text>
             </SafeAreaView>
         )
     }
 
-    const windowWidth = Dimensions.get("window").width
+    const windowWidth = Dimensions.get('window').width
     const w = windowWidth * 0.8
 
     return (
@@ -49,15 +61,20 @@ export default function ScannerScreen({ navigation }) {
                     barCodeTypes={[BarCodeScanner.Constants.BarCodeType.qr]}
                     style={StyleSheet.absoluteFillObject}
                 >
-                    <BarcodeMask width={w} height={w} edgeColor='#62B1F6' showAnimatedLine={false}></BarcodeMask>
+                    <BarcodeMask
+                        width={w}
+                        height={w}
+                        edgeColor="#62B1F6"
+                        showAnimatedLine={false}
+                    ></BarcodeMask>
 
                     <View
                         style={{
                             flex: 1,
-                            backgroundColor: "transparent",
-                            flexDirection: "row",
-                            alignItems: "center",
-                            justifyContent: "center",
+                            backgroundColor: 'transparent',
+                            flexDirection: 'row',
+                            alignItems: 'center',
+                            justifyContent: 'center',
                         }}
                     >
                         <TouchableOpacity
@@ -71,7 +88,7 @@ export default function ScannerScreen({ navigation }) {
                             }
                         >
                             <Text style={styles.buttonLabel}>
-                                <MaterialIcons size={30} name='flip-camera-android' />
+                                <MaterialIcons size={30} name="flip-camera-android" />
                             </Text>
                         </TouchableOpacity>
                     </View>
@@ -84,41 +101,41 @@ export default function ScannerScreen({ navigation }) {
 const styles = StyleSheet.create({
     container: {
         flex: 1,
-        height: "100%",
-        width: "100%",
-        alignItems: "center",
-        justifyContent: "center",
+        height: '100%',
+        width: '100%',
+        alignItems: 'center',
+        justifyContent: 'center',
     },
     scannerBox: {
-        width: "100%",
+        width: '100%',
         flexGrow: 1,
-        alignItems: "center",
+        alignItems: 'center',
     },
     title: {
         padding: 10,
         fontSize: 20,
-        fontWeight: "bold",
+        fontWeight: 'bold',
     },
     text: {
-        textAlign: "center",
+        textAlign: 'center',
     },
     separator: {
         marginVertical: 30,
         height: 1,
-        width: "80%",
+        width: '80%',
     },
     button: {
         paddingHorizontal: 8,
         paddingVertical: 6,
-        backgroundColor: "#62B1F6",
-        color: "white",
-        alignSelf: "flex-end",
-        marginHorizontal: "1%",
+        backgroundColor: '#62B1F6',
+        color: 'white',
+        alignSelf: 'flex-end',
+        marginHorizontal: '1%',
         marginBottom: 6,
-        textAlign: "center",
+        textAlign: 'center',
     },
     buttonLabel: {
-        color: "white",
-        textAlign: "center",
+        color: 'white',
+        textAlign: 'center',
     },
 })
