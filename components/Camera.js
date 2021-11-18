@@ -12,14 +12,16 @@ import {
 import { Camera } from 'expo-camera'
 import { BarCodeScanner } from 'expo-barcode-scanner'
 import BarcodeMask from 'react-native-barcode-mask'
-import { MaterialIcons } from '@expo/vector-icons'
+import { MaterialIcons, MaterialCommunityIcons } from '@expo/vector-icons'
 
 import Styles from '../config/styles.js'
+import Colours from '../config/colours.js'
 
 export default function ScanCamera(props) {
     const [hasPermission, setHasPermission] = React.useState(null)
     const [camera, setCamera] = React.useState(null)
     const [cameraType, setCameraType] = React.useState(Camera.Constants.Type.back)
+    const [flashMode, setFlashMode] = React.useState(Camera.Constants.FlashMode.off)
 
     // Screen Ratio and image padding
     const [imagePadding, setImagePadding] = React.useState(0)
@@ -104,45 +106,78 @@ export default function ScanCamera(props) {
             onBarCodeScanned={props.resultHandler}
             type={cameraType}
             barCodeTypes={[BarCodeScanner.Constants.BarCodeType.qr]}
-            //useCamera2Api={true}
+            flashMode={flashMode}
             style={[
                 StyleSheet.absoluteFillObject,
                 { marginTop: 1.5 * imagePadding, marginBottom: 0.5 * imagePadding },
             ]}
         >
-            <BarcodeMask
-                width={w}
-                height={w}
-                edgeColor="#f2c200"
-                showAnimatedLine={false}
-                outerMaskOpacity={0}
-                edgeWidth={50}
-                edgeHeight={50}
-                edgeBorderWidth={10}
-            ></BarcodeMask>
+            <View style={{ flex: 1, marginBottom: height * 0.1 }}>
+                <BarcodeMask
+                    width={w}
+                    height={w}
+                    edgeColor={Colours.light_yellow}
+                    showAnimatedLine={false}
+                    outerMaskOpacity={0}
+                    edgeWidth={50}
+                    edgeHeight={50}
+                    edgeBorderWidth={5}
+                ></BarcodeMask>
+            </View>
 
             <View
-                style={{
-                    flex: 1,
-                    backgroundColor: 'transparent',
-                    flexDirection: 'row',
-                    justifyContent: 'flex-end',
-                }}
+                onBarCodeScanned={props.resultHandler}
+                type={cameraType}
+                barCodeTypes={[BarCodeScanner.Constants.BarCodeType.qr]}
+                flashMode={flashMode}
+                style={[
+                    StyleSheet.absoluteFillObject,
+                    { marginTop: 1.5 * imagePadding, marginBottom: 0.5 * imagePadding },
+                    {
+                        flex: 1,
+                        backgroundColor: 'transparent',
+                        flexDirection: 'row',
+                        justifyContent: 'flex-end',
+                    },
+                ]}
             >
-                <TouchableOpacity
-                    style={Styles.button}
-                    onPress={() =>
-                        setCameraType(
-                            cameraType === Camera.Constants.Type.back
-                                ? Camera.Constants.Type.front
-                                : Camera.Constants.Type.back
-                        )
-                    }
-                >
-                    <Text style={Styles.buttonLabel}>
-                        <MaterialIcons size={30} name="flip-camera-android" />
-                    </Text>
-                </TouchableOpacity>
+                <View style={Styles.buttonContainer}>
+                    <TouchableOpacity
+                        style={[Styles.button]}
+                        onPress={() =>
+                            setFlashMode(
+                                flashMode === Camera.Constants.FlashMode.off
+                                    ? Camera.Constants.FlashMode.torch
+                                    : Camera.Constants.FlashMode.off
+                            )
+                        }
+                    >
+                        <Text style={Styles.buttonLabel}>
+                            <MaterialCommunityIcons
+                                size={30}
+                                name={
+                                    flashMode === Camera.Constants.FlashMode.off
+                                        ? 'flashlight'
+                                        : 'flashlight-off'
+                                }
+                            />
+                        </Text>
+                    </TouchableOpacity>
+                    <TouchableOpacity
+                        style={[Styles.button]}
+                        onPress={() =>
+                            setCameraType(
+                                cameraType === Camera.Constants.Type.back
+                                    ? Camera.Constants.Type.front
+                                    : Camera.Constants.Type.back
+                            )
+                        }
+                    >
+                        <Text style={Styles.buttonLabel}>
+                            <MaterialIcons size={30} name="flip-camera-android" />
+                        </Text>
+                    </TouchableOpacity>
+                </View>
             </View>
         </Camera>
     )
