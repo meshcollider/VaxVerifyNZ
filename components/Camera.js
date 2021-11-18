@@ -20,6 +20,7 @@ export default function ScanCamera(props) {
     const [hasPermission, setHasPermission] = React.useState(null)
     const [camera, setCamera] = React.useState(null)
     const [cameraType, setCameraType] = React.useState(Camera.Constants.Type.back)
+    const [flashMode, setFlashMode] = React.useState(Camera.Constants.FlashMode.off)
 
     // Screen Ratio and image padding
     const [imagePadding, setImagePadding] = React.useState(0)
@@ -104,6 +105,7 @@ export default function ScanCamera(props) {
             onBarCodeScanned={props.resultHandler}
             type={cameraType}
             barCodeTypes={[BarCodeScanner.Constants.BarCodeType.qr]}
+            flashMode={flashMode}
             //useCamera2Api={true}
             style={[
                 StyleSheet.absoluteFillObject,
@@ -141,6 +143,21 @@ export default function ScanCamera(props) {
                 >
                     <Text style={Styles.buttonLabel}>
                         <MaterialIcons size={30} name="flip-camera-android" />
+                    </Text>
+                </TouchableOpacity>
+
+                <TouchableOpacity
+                    style={Styles.button}
+                    onPress={() =>
+                        setFlashMode(
+                            flashMode === Camera.Constants.FlashMode.off
+                                ? Camera.Constants.FlashMode.torch
+                                : Camera.Constants.FlashMode.off
+                        )
+                    }
+                >
+                    <Text style={Styles.buttonLabel}>
+                        <MaterialIcons size={30} name="highlight" />
                     </Text>
                 </TouchableOpacity>
             </View>

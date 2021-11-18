@@ -39,7 +39,7 @@ export default function ResultModal({ route, navigation }) {
     const [result, setResult] = React.useState(null)
 
     React.useEffect(() => {
-        (async () => {
+        ;(async () => {
             const result = await verifyPassURI(data)
             setResult(result)
             setProcessed(true)

@@ -14,6 +14,7 @@ export default {
         alignSelf: 'flex-end',
         marginVertical: 50,
         marginHorizontal: Dimensions.get('window').width * 0.15,
+        marginLeft: 0,
         textAlign: 'center',
         borderRadius: 150,
         shadowColor: 'black',
