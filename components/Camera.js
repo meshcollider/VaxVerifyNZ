@@ -19,6 +19,7 @@ export default function ScanCamera(props) {
     const [hasPermission, setHasPermission] = React.useState(null)
     const [camera, setCamera] = React.useState(null)
     const [cameraType, setCameraType] = React.useState(Camera.Constants.Type.back)
+    const [flashMode, setFlashMode] = React.useState(Camera.Constants.FlashMode.off)
 
     // Screen Ratio and image padding
     const [imagePadding, setImagePadding] = React.useState(0)
@@ -104,6 +105,7 @@ export default function ScanCamera(props) {
                 onBarCodeScanned={props.resultHandler}
                 type={cameraType}
                 barCodeTypes={[BarCodeScanner.Constants.BarCodeType.qr]}
+                flashMode={flashMode}
                 //useCamera2Api={true}
                 style={[StyleSheet.absoluteFillObject, { marginTop: 1.5*imagePadding, marginBottom: 0.5*imagePadding }]}
             >
@@ -140,6 +142,23 @@ export default function ScanCamera(props) {
                             <MaterialIcons size={30} name="flip-camera-android" />
                         </Text>
                     </TouchableOpacity>
+
+                    <TouchableOpacity
+                        style={styles.button}
+                        onPress={() =>
+                            setFlashMode(
+                                flashMode === Camera.Constants.FlashMode.off
+                                    ? Camera.Constants.FlashMode.torch
+                                    : Camera.Constants.FlashMode.off
+                            )
+                        }
+                    >
+                        <Text style={styles.buttonLabel}>
+                            <MaterialIcons size={30} name="highlight" />
+                        </Text>
+                    </TouchableOpacity>
+
+
                 </View>
             </Camera>
     )
@@ -159,6 +178,7 @@ const styles = StyleSheet.create({
         backgroundColor: '#ffcc00',
         alignSelf: 'flex-end',
         margin: 20,
+        marginLeft: 0,
         textAlign: 'center',
         borderRadius: 100,
     },
