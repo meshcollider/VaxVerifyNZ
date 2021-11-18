@@ -63,12 +63,12 @@ export default function ScannerScreen({ navigation }) {
                         width={w}
                         height={w}
                         edgeColor="#ffcc00"
-                        edgeRadius={30}
+                        showAnimatedLine={false}
+                        outerMaskOpacity={0}
                         edgeWidth={50}
                         edgeHeight={50}
                         edgeBorderWidth={10}
-                        showAnimatedLine={false}
-                        outerMaskOpacity={0}
+                        edgeRadius={100}
                     ></BarcodeMask>
 
                     <View
