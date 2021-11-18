@@ -25,7 +25,7 @@ function ErrorMessage(props) {
   )
 }
 
-export default function ScanResultScreen({route, navigation}) {
+export default function ResultModal({route, navigation}) {
   const { data } = route.params;
 
   const [processed, setProcessed] = React.useState(false);
