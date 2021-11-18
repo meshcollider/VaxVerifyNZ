@@ -48,7 +48,7 @@ export default function ScannerScreen({ navigation }) {
     }
 
     const windowWidth = Dimensions.get('window').width
-    const w = windowWidth * 0.8
+    const w = windowWidth * 0.7
 
     return (
         <View style={styles.container}>
@@ -65,10 +65,9 @@ export default function ScannerScreen({ navigation }) {
                         edgeColor="#ffcc00"
                         showAnimatedLine={false}
                         outerMaskOpacity={0}
-                        edgeWidth={50}
-                        edgeHeight={50}
+                        edgeWidth={70}
+                        edgeHeight={70}
                         edgeBorderWidth={10}
-                        edgeRadius={100}
                     ></BarcodeMask>
 
                     <View
