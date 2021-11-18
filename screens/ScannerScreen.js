@@ -23,10 +23,18 @@ export default function ScannerScreen({ navigation }) {
   };
 
   if (hasPermission === null) {
-    return <Text>Please allow access to camera to scan vaccination passport QR codes.</Text>;
+    return ( 
+      <SafeAreaView style={styles.container}>
+        <Text style={styles.text}>Please allow access to camera to scan vaccination passport QR codes.</Text>
+      </SafeAreaView>
+    );
   }
   if (hasPermission === false) {
-    return <Text>Access to camera is required to scan vaccination passport QR codes.</Text>;
+    return ( 
+      <SafeAreaView style={styles.container}>
+        <Text style={styles.text}>Access to camera is required to scan vaccination passport QR codes.</Text>
+      </SafeAreaView>
+    );
   }
 
   return (
@@ -79,6 +87,9 @@ const styles = StyleSheet.create({
     padding: 10,
     fontSize: 20,
     fontWeight: 'bold',
+  },
+  text: {
+    textAlign: "center",
   },
   separator: {
     marginVertical: 30,
