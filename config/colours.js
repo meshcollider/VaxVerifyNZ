@@ -1,7 +1,5 @@
 export default {
-	black: '#000',
-	white: '#fff',
-	yellow: '#ffcc00',
-	green: '#707070',
-	transparent: '#00000000'
-};
+    light_yellow: '#f2c200',
+    dark_yellow: '#725b00',
+    transparent: '#00000000',
+}
