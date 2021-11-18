@@ -63,7 +63,9 @@ export default function ScannerScreen({ navigation }) {
                     <BarcodeMask
                         width={w}
                         height={w}
-                        edgeColor="#62B1F6"
+                        edgeColor="#FFCC00"
+                        edgeBorderWidth={6}
+                        edgeRadius={4}
                         showAnimatedLine={false}
                     ></BarcodeMask>
 
@@ -72,8 +74,7 @@ export default function ScannerScreen({ navigation }) {
                             flex: 1,
                             backgroundColor: 'transparent',
                             flexDirection: 'row',
-                            alignItems: 'center',
-                            justifyContent: 'center',
+                            justifyContent: 'flex-end',
                         }}
                     >
                         <TouchableOpacity
@@ -118,20 +119,13 @@ const styles = StyleSheet.create({
     text: {
         textAlign: 'center',
     },
-    separator: {
-        marginVertical: 30,
-        height: 1,
-        width: '80%',
-    },
     button: {
-        paddingHorizontal: 8,
-        paddingVertical: 6,
-        backgroundColor: '#62B1F6',
-        color: 'white',
+        padding: 10,
+        backgroundColor: '#FFCC00',
         alignSelf: 'flex-end',
-        marginHorizontal: '1%',
-        marginBottom: 6,
+        margin: 20,
         textAlign: 'center',
+        borderRadius: 100,
     },
     buttonLabel: {
         color: 'white',
