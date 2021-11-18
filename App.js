@@ -2,6 +2,7 @@ import { StatusBar } from 'expo-status-bar';
 import React from 'react';
 import { SafeAreaProvider } from 'react-native-safe-area-context';
 import { NativeBaseProvider, ColorMode } from 'native-base';
+import AsyncStorage from '@react-native-async-storage/async-storage';
 
 import Navigation from './navigation';
 
