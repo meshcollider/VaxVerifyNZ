@@ -1,11 +1,10 @@
 import { StatusBar } from 'expo-status-bar'
 import * as React from 'react'
-import { Platform, StyleSheet, View } from 'react-native'
+import { Platform, StyleSheet, View, ActivityIndicator } from 'react-native'
 
 import '../config/polyfills'
 
 import { verifyPassURI } from '@vaxxnz/nzcp'
-
 
 function ErrorMessage(props) {
     const section = props.violates.section
@@ -50,7 +49,7 @@ export default function ResultModal({ route, navigation }) {
     if (!processed) {
         return (
             <View style={styles.container}>
-                <Spinner size="lg" />
+                <ActivityIndicator size="large" />
             </View>
         )
     }

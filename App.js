@@ -12,21 +12,21 @@ export default function App() {
 
     return (
         <SafeAreaProvider>
-                <NavigationContainer>
-                    <Stack.Navigator>
-                        <Stack.Screen
-                            name="Root"
-                            component={ScannerScreen}
-                            options={{ headerShown: false }}
-                        />
-                        <Stack.Group screenOptions={{ presentation: 'modal' }}>
-                            <Stack.Screen name="About" component={AboutModal} />
-                        </Stack.Group>
-                        <Stack.Group screenOptions={{ presentation: 'modal' }}>
-                            <Stack.Screen name="ScanResult" component={ResultModal} />
-                        </Stack.Group>
-                    </Stack.Navigator>
-                </NavigationContainer>
+            <NavigationContainer>
+                <Stack.Navigator>
+                    <Stack.Screen
+                        name="Root"
+                        component={ScannerScreen}
+                        options={{ headerShown: false }}
+                    />
+                    <Stack.Group screenOptions={{ presentation: 'modal' }}>
+                        <Stack.Screen name="About" component={AboutModal} />
+                    </Stack.Group>
+                    <Stack.Group screenOptions={{ presentation: 'modal' }}>
+                        <Stack.Screen name="ScanResult" component={ResultModal} />
+                    </Stack.Group>
+                </Stack.Navigator>
+            </NavigationContainer>
         </SafeAreaProvider>
     )
 }
