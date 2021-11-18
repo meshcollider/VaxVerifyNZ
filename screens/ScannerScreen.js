@@ -4,7 +4,6 @@ import {
     View,
     SafeAreaView,
     Text,
-    Button,
     TouchableOpacity,
     Dimensions,
     ActivityIndicator,
@@ -17,7 +16,6 @@ export default function ScannerScreen({ navigation }) {
     const isFocused = useIsFocused();
 
     const handleBarCodeScanned = ({ type, data }) => {
-        //alert(`Bar code with type ${type} and data ${data} has been scanned!`);
         navigation.navigate('ScanResult', { data: data })
     }
 
@@ -41,9 +39,15 @@ const styles = StyleSheet.create({
         padding: 10,
         backgroundColor: '#ffcc00',
         alignSelf: 'flex-end',
-        margin: 20,
+        marginVertical: 40,
+        marginHorizontal: Dimensions.get('window').width * 0.15,
         textAlign: 'center',
-        borderRadius: 100,
+        borderRadius: 150,
+        shadowColor: 'black',
+        shadowRadius: 40,
+        elevation: 3,
+        shadowOffset: { width: 0, height: 10 },
+        shadowOpacity: 1,
     },
     buttonLabel: {
         color: 'white',
