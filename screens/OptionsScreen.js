@@ -1,33 +1,21 @@
 import * as React from 'react';
-import { StyleSheet, View, Text } from 'react-native';
-import { Switch, useColorMode, useColorModeValue } from 'native-base';
+import { StyleSheet } from 'react-native';
+import { Heading, Center, VStack, HStack, Switch, Text, Box, useColorMode, useColorModeValue } from 'native-base';
 
 export default function OptionsScreen() {
   const { toggleColorMode } = useColorMode()
   return (
-    <View style={styles.container}>
-      <Text style={styles.title}>Options</Text>
-      <View style={styles.separator} lightColor="#eee" darkColor="rgba(255,255,255,0.1)" />
-      <Text>TODO: Front/Back camera, dark/light mode, trusted authorities/caching?</Text>
-      <Text>Colour mode: {useColorModeValue("Light", "Dark")}</Text>
-      <Switch size="lg" isChecked={useColorModeValue(true, false)}  onToggle={toggleColorMode} />
-    </View>
+    <Box flex={1} bg={useColorModeValue("#F0F0F0", "#3C3C3C")}>
+      <Center alignContent='center'  alignItems='center' flex={1}>
+        <VStack space={4} alignItems="center"> 
+          <Heading>Options</Heading>
+          <Text textAlign='center'>TODO: Front/Back camera, dark/light mode, trusted authorities/caching?</Text>
+          <HStack alignItems="center" space={4}>
+            <Text>{useColorModeValue("Light", "Dark")} mode</Text>
+            <Switch size="lg" isChecked={useColorModeValue(true, false)} offTrackColor="#CCCC00" onToggle={toggleColorMode} />
+          </HStack>
+        </VStack>
+      </Center>
+    </Box>
   );
 }
-
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    alignItems: 'center',
-    justifyContent: 'center',
-  },
-  title: {
-    fontSize: 20,
-    fontWeight: 'bold',
-  },
-  separator: {
-    marginVertical: 30,
-    height: 1,
-    width: '80%',
-  },
-});
