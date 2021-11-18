@@ -157,8 +157,8 @@ export default function ScanCamera(props) {
                                 size={30}
                                 name={
                                     flashMode === Camera.Constants.FlashMode.off
-                                        ? 'flashlight'
-                                        : 'flashlight-off'
+                                        ? 'lightbulb-outline'
+                                        : 'lightbulb-on'
                                 }
                             />
                         </Text>
