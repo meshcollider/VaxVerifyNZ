@@ -6,17 +6,12 @@ import '../config/polyfills';
 
 import { verifyPassURI } from "@vaxxnz/nzcp";
 
+import ShowQRButton from "../components/ShowQRButton";
 
-
-
-function showQRData(data) {
-  Alert.alert("QR code data:", data);
-}
 
 function ErrorMessage(props) {
   const section = props.violates.section;
   const message = props.violates.message;
-  const data = props.data;
   
   return (
       <>
@@ -25,7 +20,7 @@ function ErrorMessage(props) {
              message + " (Section: " + section + ")" }
       </Text>
       <View style={styles.separator} lightColor="#eee" darkColor="rgba(255,255,255,0.1)" />
-      <Button title='Show QR Data' onPress={showQRData.bind(this, data)} />
+      <ShowQRButton data={props.data} />
       </>
   )
 }

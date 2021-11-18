@@ -1,12 +1,14 @@
 import * as React from 'react';
-import { StyleSheet, View, Text, Button, TouchableOpacity } from 'react-native';
+import { StyleSheet, View, SafeAreaView, Text, Button, TouchableOpacity } from 'react-native';
 
 import { BarCodeScanner } from 'expo-barcode-scanner';
 import BarcodeMask from 'react-native-barcode-mask';
+import { MaterialIcons } from '@expo/vector-icons';
 
 export default function ScannerScreen({ navigation }) {
 
   const [hasPermission, setHasPermission] = React.useState(null);
+  const [cameraType, setCameraType] = React.useState(BarCodeScanner.Constants.Type.back);
 
   React.useEffect(() => {
     (async () => {
@@ -28,23 +30,35 @@ export default function ScannerScreen({ navigation }) {
   }
 
   return (
-    <View style={styles.container}>
+    <SafeAreaView style={styles.container}>
       <Text style={styles.title}>Scan NZ Vaccine Pass</Text>
       <View style={styles.scannerBox}>
         <BarCodeScanner   onBarCodeScanned={handleBarCodeScanned}
+                          type={cameraType}
                           barCodeTypes={[BarCodeScanner.Constants.BarCodeType.qr]}
                           style={StyleSheet.absoluteFillObject}>
+        <BarcodeMask edgeColor="#62B1F6" showAnimatedLine={false}></BarcodeMask>
+        
+
           <View
               style={{
                   flex: 1,
                   backgroundColor: 'transparent',
                   flexDirection: 'row',
+                  alignItems: 'center',
+                  justifyContent: 'center',
               }}>
+            <TouchableOpacity style={styles.button}
+                                onPress={() => setCameraType(cameraType === BarCodeScanner.Constants.Type.back ? BarCodeScanner.Constants.Type.front : BarCodeScanner.Constants.Type.back)}
+            >
+              <Text style={styles.buttonLabel}><MaterialIcons size={30} name="flip-camera-android" /></Text>
+            </TouchableOpacity>
+
+        
           </View>
-        <BarcodeMask edgeColor="#62B1F6" showAnimatedLine={false}></BarcodeMask>
         </BarCodeScanner>
       </View>
-    </View>
+    </SafeAreaView>
   );
 }
 
@@ -71,4 +85,18 @@ const styles = StyleSheet.create({
     height: 1,
     width: '80%',
   },
+  button: {
+    paddingHorizontal: 8,
+    paddingVertical: 6,
+    backgroundColor: "#62B1F6",
+    color: "white",
+    alignSelf: "flex-end",
+    marginHorizontal: "1%",
+    marginBottom: 6,
+    textAlign: "center",
+  },
+  buttonLabel: {
+    color: "white",
+    textAlign: "center",
+  }
 });
