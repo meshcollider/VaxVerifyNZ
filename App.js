@@ -2,7 +2,7 @@ import React from "react"
 import { SafeAreaProvider } from "react-native-safe-area-context"
 import { NativeBaseProvider } from "native-base"
 import AsyncStorage from "@react-native-async-storage/async-storage"
-import { NavigationContainer, LightTheme, DefaultTheme, DarkTheme } from "@react-navigation/native"
+import { NavigationContainer, LightTheme, DarkTheme } from "@react-navigation/native"
 import { useColorModeValue, Icon } from "native-base"
 import { createNativeStackNavigator } from "@react-navigation/native-stack"
 import { createBottomTabNavigator } from "@react-navigation/bottom-tabs"
@@ -17,7 +17,7 @@ export default function App() {
     const colorModeManager = {
         get: async () => {
             try {
-                let val = await AsyncStorage.getItem("@my-app-color-mode")
+                let val = await AsyncStorage.getItem("@vaxverifynz-color-mode")
                 return val === "dark" ? "dark" : "light"
             } catch (e) {
                 console.log(e)
@@ -26,7 +26,7 @@ export default function App() {
         },
         set: async value => {
             try {
-                await AsyncStorage.setItem("@my-app-color-mode", value)
+                await AsyncStorage.setItem("@vaxverifynz-color-mode", value)
             } catch (e) {
                 console.log(e)
             }
