@@ -10,6 +10,8 @@ import {
     ActivityIndicator,
 } from 'react-native'
 import { useIsFocused } from '@react-navigation/native';
+import { MaterialCommunityIcons } from '@expo/vector-icons'
+
 
 import ScanCamera from '../components/Camera.js'
 
@@ -23,6 +25,19 @@ export default function ScannerScreen({ navigation }) {
 
     return (
         <View style={styles.container}>
+            <SafeAreaView style={styles.settingsBox}>
+                <TouchableOpacity
+                    style={styles.settingsButton}
+                    onPress={() =>
+                        alert("pushed")
+                    }
+                >
+                    <Text style={styles.buttonLabel}>
+                        <MaterialCommunityIcons size={30} name="dots-vertical" />
+                    </Text>
+                </TouchableOpacity>
+            </SafeAreaView>
+
             {isFocused && <ScanCamera resultHandler={handleBarCodeScanned}  />}
         </View>
     )
@@ -34,19 +49,25 @@ const styles = StyleSheet.create({
         backgroundColor: '#ffcc00',
         justifyContent: 'center',
     },
-    text: {
-        textAlign: 'center',
+    settingsBox: {
+        top: 20,
+        right: 5,
+        position: 'absolute'
     },
-    button: {
+    settingsButton: {
+        top: 20,
+        right: 5,
         padding: 10,
-        backgroundColor: '#ffcc00',
         alignSelf: 'flex-end',
-        margin: 20,
+        position: 'absolute',
         textAlign: 'center',
         borderRadius: 100,
+        zIndex: 3, // works on ios
+        elevation: 3, // works on android
     },
     buttonLabel: {
         color: 'white',
         textAlign: 'center',
+        opacity: 1,
     },
 })
