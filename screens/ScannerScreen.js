@@ -41,7 +41,7 @@ export default function ScannerScreen({ navigation }) {
   const w = windowWidth * 0.8
 
   return (
-    <SafeAreaView style={styles.container}>
+    <View style={styles.container}>
       <Text style={styles.title}>Scan NZ Vaccine Pass</Text>
       <View style={styles.scannerBox}>
         <BarCodeScanner   onBarCodeScanned={handleBarCodeScanned}
@@ -69,7 +69,7 @@ export default function ScannerScreen({ navigation }) {
           </View>
         </BarCodeScanner>
       </View>
-    </SafeAreaView>
+    </View>
   );
 }
 
