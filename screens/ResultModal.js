@@ -1,12 +1,12 @@
 import { StatusBar } from 'expo-status-bar'
 import * as React from 'react'
-import { Platform, StyleSheet, View, Text, ActivityIndicator, Button, Alert } from 'react-native'
+import { Platform, StyleSheet, View } from 'react-native'
+import { Text, Box, Button, Alert, Spinner, Divider } from 'native-base'
 
 import '../config/polyfills'
 
 import { verifyPassURI } from '@vaxxnz/nzcp'
 
-import ShowQRButton from '../components/ShowQRButton'
 
 function ErrorMessage(props) {
     const section = props.violates.section
@@ -19,9 +19,19 @@ function ErrorMessage(props) {
                     ? 'QR code is not a valid NZ Covid Pass'
                     : message + ' (Section: ' + section + ')'}
             </Text>
-            <View style={styles.separator} lightColor="#eee" darkColor="rgba(255,255,255,0.1)" />
-            <ShowQRButton data={props.data} />
         </>
+    )
+}
+
+function SuccessData(props) {
+    const subject = props.subject
+    return (
+        <View style={styles.container}>
+            <Text style={styles.title}>Success</Text>
+            <Text>Given name: {subject.givenName}</Text>
+            <Text>Family name: {subject.familyName}</Text>
+            <Text>Date of birth: {subject.dob}</Text>
+        </View>
     )
 }
 
@@ -41,7 +51,7 @@ export default function ResultModal({ route, navigation }) {
     if (!processed) {
         return (
             <View style={styles.container}>
-                <ActivityIndicator size="large" color="#00ffee" />
+                <Spinner size="lg" />
             </View>
         )
     }
@@ -59,14 +69,12 @@ export default function ResultModal({ route, navigation }) {
 
     const subject = result.credentialSubject
     return (
-        <View style={styles.container}>
-            <Text style={styles.title}>Success</Text>
-            <Text>Given name: {subject.givenName}</Text>
-            <Text>Family name: {subject.familyName}</Text>
-            <Text>Date of birth: {subject.dob}</Text>
+        <Box>
+            <SuccessData subject={subject} />
+
             {/* Use a light status bar on iOS to account for the black space above the modal */}
             <StatusBar style={Platform.OS === 'ios' ? 'light' : 'auto'} />
-        </View>
+        </Box>
     )
 }
 
