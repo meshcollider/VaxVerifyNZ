@@ -1,6 +1,6 @@
 import { StatusBar } from 'expo-status-bar'
 import * as React from 'react'
-import { Platform, StyleSheet, View, ActivityIndicator } from 'react-native'
+import { Platform, StyleSheet, Text, View, ActivityIndicator } from 'react-native'
 
 import '../config/polyfills'
 
@@ -39,7 +39,7 @@ export default function ResultModal({ route, navigation }) {
     const [result, setResult] = React.useState(null)
 
     React.useEffect(() => {
-        ;(async () => {
+        (async () => {
             const result = await verifyPassURI(data)
             setResult(result)
             setProcessed(true)
@@ -67,12 +67,12 @@ export default function ResultModal({ route, navigation }) {
 
     const subject = result.credentialSubject
     return (
-        <Box>
+        <View style={styles.container}>
             <SuccessData subject={subject} />
 
             {/* Use a light status bar on iOS to account for the black space above the modal */}
             <StatusBar style={Platform.OS === 'ios' ? 'light' : 'auto'} />
-        </Box>
+        </View>
     )
 }
 
