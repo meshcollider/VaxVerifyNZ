@@ -43,7 +43,8 @@
         "text-encoding-polyfill": "^0.6.7"
     },
     "devDependencies": {
-        "@babel/core": "~7.9.0"
+        "@babel/core": "~7.9.0",
+        "prettier": "^2.4.1"
     },
     "private": true
 }
