@@ -8,6 +8,7 @@ import {
     TouchableOpacity,
     Dimensions,
 } from 'react-native'
+import { Spinner } from 'native-base'
 
 import { BarCodeScanner } from 'expo-barcode-scanner'
 import BarcodeMask from 'react-native-barcode-mask'
@@ -18,7 +19,7 @@ export default function ScannerScreen({ navigation }) {
     const [cameraType, setCameraType] = React.useState(BarCodeScanner.Constants.Type.back)
 
     React.useEffect(() => {
-        ;(async () => {
+        (async () => {
             const { status } = await BarCodeScanner.requestPermissionsAsync()
             setHasPermission(status === 'granted')
         })()
@@ -32,9 +33,7 @@ export default function ScannerScreen({ navigation }) {
     if (hasPermission === null) {
         return (
             <SafeAreaView style={styles.container}>
-                <Text style={styles.text}>
-                    Please allow access to camera to scan vaccination passport QR codes.
-                </Text>
+                <Spinner size="lg" />
             </SafeAreaView>
         )
     }
