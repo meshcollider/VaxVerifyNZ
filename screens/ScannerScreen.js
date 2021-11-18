@@ -68,8 +68,8 @@ export default function ScannerScreen({ navigation }) {
     }
 
     React.useEffect(() => {
-        ;(async () => {
-            const { status } = await Camera.requestPermissionsAsync()
+        (async () => {
+            const { status } = await Camera.requestCameraPermissionsAsync()
             setHasPermission(status === 'granted')
         })()
     }, [])
@@ -109,7 +109,7 @@ export default function ScannerScreen({ navigation }) {
                 onBarCodeScanned={handleBarCodeScanned}
                 type={cameraType}
                 barCodeTypes={[BarCodeScanner.Constants.BarCodeType.qr]}
-                useCamera2Api={true}
+                //useCamera2Api={true}
                 style={[StyleSheet.absoluteFillObject, { marginTop: imagePadding * 2 }]}
             >
                 <BarcodeMask
@@ -135,9 +135,9 @@ export default function ScannerScreen({ navigation }) {
                         style={styles.button}
                         onPress={() =>
                             setCameraType(
-                                cameraType === BarCodeScanner.Constants.Type.back
-                                    ? BarCodeScanner.Constants.Type.front
-                                    : BarCodeScanner.Constants.Type.back
+                                cameraType === Camera.Constants.Type.back
+                                    ? Camera.Constants.Type.front
+                                    : Camera.Constants.Type.back
                             )
                         }
                     >
