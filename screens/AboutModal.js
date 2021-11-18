@@ -2,7 +2,7 @@ import { StatusBar } from 'expo-status-bar';
 import * as React from 'react';
 import { Platform, StyleSheet, View, Text } from 'react-native';
 
-export default function ModalScreen() {
+export default function AboutModal() {
   return (
     <View style={styles.container}>
       <Text style={styles.title}>About Vax Verify NZ</Text>

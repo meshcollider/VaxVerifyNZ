@@ -1,10 +1,10 @@
 import { StatusBar } from 'expo-status-bar';
 import React from 'react';
 import { SafeAreaProvider } from 'react-native-safe-area-context';
-import { NativeBaseProvider, ColorMode } from 'native-base';
+import { NativeBaseProvider } from 'native-base';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 
-import Navigation from './navigation';
+import Navigation from './config/navigation';
 
 export default function App() {
 
