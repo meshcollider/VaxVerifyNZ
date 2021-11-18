@@ -1,61 +1,49 @@
-import { StatusBar } from "expo-status-bar";
-import * as React from "react";
-import {
-    Platform,
-    StyleSheet,
-    View,
-    Text,
-    ActivityIndicator,
-    Button,
-    Alert,
-} from "react-native";
+import { StatusBar } from 'expo-status-bar'
+import * as React from 'react'
+import { Platform, StyleSheet, View, Text, ActivityIndicator, Button, Alert } from 'react-native'
 
-import "../config/polyfills";
+import '../config/polyfills'
 
-import { verifyPassURI } from "@vaxxnz/nzcp";
+import { verifyPassURI } from '@vaxxnz/nzcp'
 
-import ShowQRButton from "../components/ShowQRButton";
+import ShowQRButton from '../components/ShowQRButton'
 
 function ErrorMessage(props) {
-    const section = props.violates.section;
-    const message = props.violates.message;
+    const section = props.violates.section
+    const message = props.violates.message
 
     return (
         <>
             <Text>
-                {section === "4.4" || section === "4.5"
-                    ? "QR code is not a valid NZ Covid Pass"
-                    : message + " (Section: " + section + ")"}
+                {section === '4.4' || section === '4.5'
+                    ? 'QR code is not a valid NZ Covid Pass'
+                    : message + ' (Section: ' + section + ')'}
             </Text>
-            <View
-                style={styles.separator}
-                lightColor="#eee"
-                darkColor="rgba(255,255,255,0.1)"
-            />
+            <View style={styles.separator} lightColor="#eee" darkColor="rgba(255,255,255,0.1)" />
             <ShowQRButton data={props.data} />
         </>
-    );
+    )
 }
 
 export default function ResultModal({ route, navigation }) {
-    const { data } = route.params;
-    const [processed, setProcessed] = React.useState(false);
-    const [result, setResult] = React.useState(null);
+    const { data } = route.params
+    const [processed, setProcessed] = React.useState(false)
+    const [result, setResult] = React.useState(null)
 
     React.useEffect(() => {
-        (async () => {
-            const result = await verifyPassURI(data);
-            setResult(result);
-            setProcessed(true);
-        })();
-    }, []);
+        ;(async () => {
+            const result = await verifyPassURI(data)
+            setResult(result)
+            setProcessed(true)
+        })()
+    }, [])
 
     if (!processed) {
         return (
             <View style={styles.container}>
                 <ActivityIndicator size="large" color="#00ffee" />
             </View>
-        );
+        )
     }
 
     if (!result.success) {
@@ -64,12 +52,12 @@ export default function ResultModal({ route, navigation }) {
                 <Text style={styles.title}>Invalid Code</Text>
                 <ErrorMessage violates={result.violates} data={data} />
                 {/* Use a light status bar on iOS to account for the black space above the modal */}
-                <StatusBar style={Platform.OS === "ios" ? "light" : "auto"} />
+                <StatusBar style={Platform.OS === 'ios' ? 'light' : 'auto'} />
             </View>
-        );
+        )
     }
 
-    const subject = result.credentialSubject;
+    const subject = result.credentialSubject
     return (
         <View style={styles.container}>
             <Text style={styles.title}>Success</Text>
@@ -77,28 +65,28 @@ export default function ResultModal({ route, navigation }) {
             <Text>Family name: {subject.familyName}</Text>
             <Text>Date of birth: {subject.dob}</Text>
             {/* Use a light status bar on iOS to account for the black space above the modal */}
-            <StatusBar style={Platform.OS === "ios" ? "light" : "auto"} />
+            <StatusBar style={Platform.OS === 'ios' ? 'light' : 'auto'} />
         </View>
-    );
+    )
 }
 
 const styles = StyleSheet.create({
     container: {
         flex: 1,
-        alignItems: "center",
-        justifyContent: "center",
+        alignItems: 'center',
+        justifyContent: 'center',
     },
     content: {
-        width: "90%",
-        textAlign: "center",
+        width: '90%',
+        textAlign: 'center',
     },
     title: {
         fontSize: 20,
-        fontWeight: "bold",
+        fontWeight: 'bold',
     },
     separator: {
         marginVertical: 30,
         height: 1,
-        width: "80%",
+        width: '80%',
     },
-});
+})
