@@ -27,4 +27,21 @@ export default {
         color: Colours.dark_yellow,
         textAlign: 'center',
     },
+    settingsButton: {
+        top: 20,
+        right: 5,
+        padding: 10,
+        backgroundColor: 'transparent',
+        alignSelf: 'flex-end',
+        position: 'absolute',
+        textAlign: 'center',
+        borderRadius: 100,
+        zIndex: 3, // works on ios
+        elevation: 3, // works on android
+    },
+    settingsBox: {
+        top: 20,
+        right: 5,
+        position: 'absolute',
+    },
 }
