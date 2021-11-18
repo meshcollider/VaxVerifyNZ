@@ -3,15 +3,13 @@ import { SafeAreaProvider } from 'react-native-safe-area-context'
 import { NativeBaseProvider } from 'native-base'
 import AsyncStorage from '@react-native-async-storage/async-storage'
 import { NavigationContainer, LightTheme, DarkTheme } from '@react-navigation/native'
-import { useColorModeValue, Icon } from 'native-base'
+import { useColorModeValue } from 'native-base'
 import { createNativeStackNavigator } from '@react-navigation/native-stack'
-import { createBottomTabNavigator } from '@react-navigation/bottom-tabs'
 
 import NavBar from './components/NavBar'
 
 import AboutModal from './screens/AboutModal'
 import ResultModal from './screens/ResultModal'
-import NotFoundScreen from './screens/NotFoundScreen'
 
 export default function App() {
     const colorModeManager = {
@@ -43,11 +41,6 @@ export default function App() {
                         <Stack.Screen
                             name="Root"
                             component={NavBar}
-                            options={{ headerShown: false }}
-                        />
-                        <Stack.Screen
-                            name="NotFound"
-                            component={NotFoundScreen}
                             options={{ headerShown: false }}
                         />
                         <Stack.Group screenOptions={{ presentation: 'modal' }}>
