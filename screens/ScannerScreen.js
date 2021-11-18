@@ -7,8 +7,8 @@ import {
     Button,
     TouchableOpacity,
     Dimensions,
+    ActivityIndicator,
 } from 'react-native'
-import { Spinner } from 'native-base'
 
 import { BarCodeScanner } from 'expo-barcode-scanner'
 import BarcodeMask from 'react-native-barcode-mask'
@@ -33,7 +33,7 @@ export default function ScannerScreen({ navigation }) {
     if (hasPermission === null) {
         return (
             <SafeAreaView style={styles.container}>
-                <Spinner size="lg" />
+                <ActivityIndicator size="large" />
             </SafeAreaView>
         )
     }
@@ -52,7 +52,6 @@ export default function ScannerScreen({ navigation }) {
 
     return (
         <View style={styles.container}>
-            <Text style={styles.title}>Scan NZ Vaccine Pass</Text>
             <View style={styles.scannerBox}>
                 <BarCodeScanner
                     onBarCodeScanned={handleBarCodeScanned}
@@ -63,8 +62,13 @@ export default function ScannerScreen({ navigation }) {
                     <BarcodeMask
                         width={w}
                         height={w}
-                        edgeColor="#62B1F6"
+                        edgeColor="#ffcc00"
+                        edgeRadius={30}
+                        edgeWidth={50}
+                        edgeHeight={50}
+                        edgeBorderWidth={10}
                         showAnimatedLine={false}
+                        outerMaskOpacity={0}
                     ></BarcodeMask>
 
                     <View
@@ -107,7 +111,7 @@ const styles = StyleSheet.create({
     },
     scannerBox: {
         width: '100%',
-        flexGrow: 1,
+        height: '100%',
         alignItems: 'center',
     },
     title: {

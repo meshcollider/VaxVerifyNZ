@@ -1,46 +1,22 @@
 import React from 'react'
 import { SafeAreaProvider } from 'react-native-safe-area-context'
-import { NativeBaseProvider } from 'native-base'
-import AsyncStorage from '@react-native-async-storage/async-storage'
-import { NavigationContainer, LightTheme, DarkTheme } from '@react-navigation/native'
-import { useColorModeValue } from 'native-base'
+import { NavigationContainer } from '@react-navigation/native'
 import { createNativeStackNavigator } from '@react-navigation/native-stack'
 
-import NavBar from './components/NavBar'
-
+import ScannerScreen from './screens/ScannerScreen'
 import AboutModal from './screens/AboutModal'
 import ResultModal from './screens/ResultModal'
 
 export default function App() {
-    const colorModeManager = {
-        get: async () => {
-            try {
-                let val = await AsyncStorage.getItem('@vaxverifynz-color-mode')
-                return val === 'dark' ? 'dark' : 'light'
-            } catch (e) {
-                console.log(e)
-                return 'light'
-            }
-        },
-        set: async value => {
-            try {
-                await AsyncStorage.setItem('@vaxverifynz-color-mode', value)
-            } catch (e) {
-                console.log(e)
-            }
-        },
-    }
-
     const Stack = createNativeStackNavigator()
 
     return (
         <SafeAreaProvider>
-            <NativeBaseProvider colorModeManager={colorModeManager}>
-                <NavigationContainer theme={useColorModeValue(LightTheme, DarkTheme)}>
+                <NavigationContainer>
                     <Stack.Navigator>
                         <Stack.Screen
                             name="Root"
-                            component={NavBar}
+                            component={ScannerScreen}
                             options={{ headerShown: false }}
                         />
                         <Stack.Group screenOptions={{ presentation: 'modal' }}>
@@ -51,7 +27,6 @@ export default function App() {
                         </Stack.Group>
                     </Stack.Navigator>
                 </NavigationContainer>
-            </NativeBaseProvider>
         </SafeAreaProvider>
     )
 }
