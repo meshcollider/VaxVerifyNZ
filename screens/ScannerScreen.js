@@ -37,20 +37,31 @@ export default function ScannerScreen({ navigation }) {
             let distances = {}
             let realRatios = {}
             let minDistance = null
+            alert(ratios)
             for (const ratio of ratios) {
                 const parts = ratio.split(':')
                 const realRatio = parseInt(parts[0]) / parseInt(parts[1])
                 realRatios[ratio] = realRatio
-                // ratio can't be taller than screen, so we don't want an abs()
-                const distance = screenRatio - realRatio
-                distances[ratio] = realRatio
+                const effectiveHeight = realRatio * width
+                const heightDiff = Math.abs(height - effectiveHeight)
+                distances[ratio] = heightDiff
                 if (minDistance == null) {
                     minDistance = ratio
                 } else {
-                    if (distance >= 0 && distance < distances[minDistance]) {
+                    if (heightDiff < distances[minDistance]) {
                         minDistance = ratio
                     }
                 }
+                // ratio can't be taller than screen, so we don't want an abs()
+                //const distance = Math.abs(screenRatio - realRatio)
+                //distances[ratio] = realRatio
+                //if (minDistance == null) {
+                //    minDistance = ratio
+                //} else {
+                //    if (distance >= 0 && distance < distances[minDistance]) {
+                //        minDistance = ratio
+                //    }
+                //}
             }
             desiredRatio = minDistance
             const remainder = Math.floor((height - realRatios[desiredRatio] * width) / 2)
@@ -110,7 +121,7 @@ export default function ScannerScreen({ navigation }) {
                 type={cameraType}
                 barCodeTypes={[BarCodeScanner.Constants.BarCodeType.qr]}
                 //useCamera2Api={true}
-                style={[StyleSheet.absoluteFillObject, { marginTop: imagePadding * 2 }]}
+                style={[StyleSheet.absoluteFillObject, { marginTop: 1.5*imagePadding, marginBottom: 0.5*imagePadding }]}
             >
                 <BarcodeMask
                     width={w}
