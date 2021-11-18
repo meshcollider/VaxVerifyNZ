@@ -1,5 +1,5 @@
 import * as React from 'react'
-import { StyleSheet, View, Text, TouchableOpacity, SafeAreaView } from 'react-native'
+import { View, SafeAreaView, Text, TouchableOpacity } from 'react-native'
 import { useIsFocused } from '@react-navigation/native'
 import { MaterialCommunityIcons } from '@expo/vector-icons'
 

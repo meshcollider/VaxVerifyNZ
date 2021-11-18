@@ -8,20 +8,23 @@ export default {
     text: {
         textAlign: 'center',
     },
-    button: {
-        padding: 10,
-        backgroundColor: Colours.light_yellow,
+    buttonContainer: {
         alignSelf: 'flex-end',
-        marginVertical: 50,
         marginHorizontal: Dimensions.get('window').width * 0.15,
-        marginLeft: 0,
+        marginVertical: Dimensions.get('window').width * 0.1,
+    },
+    button: {
+        padding: 12,
+        backgroundColor: Colours.light_yellow,
         textAlign: 'center',
         borderRadius: 150,
         shadowColor: 'black',
         shadowRadius: 40,
         elevation: 3,
+        zIndex: 3,
         shadowOffset: { width: 0, height: 10 },
         shadowOpacity: 1,
+        marginTop: 20,
     },
     buttonLabel: {
         color: Colours.dark_yellow,
@@ -31,7 +34,6 @@ export default {
         top: 20,
         right: 5,
         padding: 10,
-        backgroundColor: 'transparent',
         alignSelf: 'flex-end',
         position: 'absolute',
         textAlign: 'center',
