@@ -1,5 +1,5 @@
 import * as React from 'react';
-import { StyleSheet, View, SafeAreaView, Text, Button, TouchableOpacity } from 'react-native';
+import { StyleSheet, View, SafeAreaView, Text, Button, TouchableOpacity, Dimensions } from 'react-native';
 
 import { BarCodeScanner } from 'expo-barcode-scanner';
 import BarcodeMask from 'react-native-barcode-mask';
@@ -37,6 +37,9 @@ export default function ScannerScreen({ navigation }) {
     );
   }
 
+  const windowWidth = Dimensions.get('window').width;
+  const w = windowWidth * 0.8
+
   return (
     <SafeAreaView style={styles.container}>
       <Text style={styles.title}>Scan NZ Vaccine Pass</Text>
@@ -45,7 +48,7 @@ export default function ScannerScreen({ navigation }) {
                           type={cameraType}
                           barCodeTypes={[BarCodeScanner.Constants.BarCodeType.qr]}
                           style={StyleSheet.absoluteFillObject}>
-        <BarcodeMask edgeColor="#62B1F6" showAnimatedLine={false}></BarcodeMask>
+        <BarcodeMask width={w} height={w}  edgeColor="#62B1F6" showAnimatedLine={false}></BarcodeMask>
         
 
           <View
