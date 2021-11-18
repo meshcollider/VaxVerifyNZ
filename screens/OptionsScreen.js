@@ -1,5 +1,4 @@
 import * as React from 'react';
-import { StyleSheet } from 'react-native';
 import { Heading, Center, VStack, HStack, Switch, Text, Box, useColorMode, useColorModeValue } from 'native-base';
 
 export default function OptionsScreen() {
