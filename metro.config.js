@@ -1,7 +1,7 @@
 module.exports = {
-	resolver: {
-		extraNodeModules: {
-			stream: require.resolve("stream-browserify"),
-		},
-	},
+    resolver: {
+        extraNodeModules: {
+            stream: require.resolve("stream-browserify"),
+        },
+    },
 }

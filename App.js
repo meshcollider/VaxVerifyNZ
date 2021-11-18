@@ -39,7 +39,7 @@ export default function App() {
 
   return (
 		<SafeAreaProvider>
-			<NativeBaseProvider colorModeManager={colorModeManager}>
+		  <NativeBaseProvider colorModeManager={colorModeManager}>
 				<NavigationContainer theme={useColorModeValue(LightTheme, DarkTheme)}>
 					<Stack.Navigator>
 						<Stack.Screen name='Root' component={NavBar} options={{ headerShown: false }} />
