@@ -3,12 +3,13 @@
  * https://reactnavigation.org/docs/getting-started
  *
  */
-import { FontAwesome } from '@expo/vector-icons';
+import { AntDesign } from '@expo/vector-icons';
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
-import { NavigationContainer, DefaultTheme, DarkTheme } from '@react-navigation/native';
+import { NavigationContainer, LightTheme, DefaultTheme, DarkTheme } from '@react-navigation/native';
 import { createNativeStackNavigator } from '@react-navigation/native-stack';
 import * as React from 'react';
-import { ColorSchemeName, Pressable } from 'react-native';
+import { Pressable } from 'react-native';
+import { useColorModeValue, Icon } from 'native-base';
 
 import AboutScreen from '../screens/AboutScreen';
 import NotFoundScreen from '../screens/NotFoundScreen';
@@ -19,7 +20,7 @@ import LinkingConfiguration from './LinkingConfiguration';
 
 export default function Navigation() {
   return (
-    <NavigationContainer
+    <NavigationContainer theme={useColorModeValue(LightTheme, DarkTheme)}
       linking={LinkingConfiguration}>
       <RootNavigator />
     </NavigationContainer>
@@ -55,16 +56,17 @@ function BottomTabNavigator() {
         component={ScannerScreen}
         options={({ navigation }) => ({
           title: 'Vax Pass Scanner',
-          tabBarIcon: ({ color }) => <TabBarIcon name="qrcode" color={color} />,
+          tabBarIcon: () => <TabBarIcon name="qrcode" />,
           headerRight: () => (
             <Pressable
               onPress={() => navigation.navigate('About')}
               style={({ pressed }) => ({
                 opacity: pressed ? 0.5 : 1,
               })}>
-              <FontAwesome
-                name="info-circle"
+              <Icon as={AntDesign}
+                name="infocirlce"
                 size={25}
+                color={useColorModeValue("coolGray.800", "warmGray.50")}
                 style={{ marginRight: 15 }}
               />
             </Pressable>
@@ -76,13 +78,14 @@ function BottomTabNavigator() {
         component={OptionsScreen}
         options={{
           title: 'Options',
-          tabBarIcon: ({ color }) => <TabBarIcon name="cog" color={color} />,
+          tabBarIcon: () => <TabBarIcon name="setting" />,
         }}
       />
     </BottomTab.Navigator>
   );
 }
 
-function TabBarIcon() {
-  return <FontAwesome size={30} style={{ marginBottom: -3 }}/>;
+function TabBarIcon(props) {
+  const unfocusedColor = useColorModeValue("coolGray.800", "warmGray.50");
+  return <Icon as={AntDesign} size={30} color={unfocusedColor}  style={{ marginBottom: -3 }} {...props} />;
 }
