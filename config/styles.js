@@ -27,7 +27,7 @@ export default {
         marginTop: 20,
     },
     buttonLabel: {
-        color: Colours.dark_yellow,
+        color: Colours.light_yellow,
         textAlign: 'center',
     },
     settingsButton: {
@@ -50,6 +50,8 @@ export default {
     },
     menuStyle: {
         backgroundColor: Colours.dark_yellow,
+    },
+    menuItemStyle: {
     },
     menuItemTextStyle: {
         color: 'white',

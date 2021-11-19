@@ -58,9 +58,14 @@ export default function ScannerScreen({ navigation }) {
                     onRequestClose={hideMenu}
                     style={Styles.menuStyle}
                 >
-                    <MenuItem onPress={toggleVibrate} textStyle={Styles.menuItemTextStyle}>Turn {shouldVibrate ? 'off' : 'on'} vibration</MenuItem>
+                    <MenuItem onPress={toggleVibrate} textStyle={Styles.menuItemTextStyle} style={Styles.menuItemStyle}>
+                        <MaterialCommunityIcons name= {shouldVibrate ? "vibrate-off" : "vibrate"} /> Turn {shouldVibrate ? 'off' : 'on'} vibration
+                    </MenuItem>
+                    
                     <MenuDivider color={Colours.light_yellow} />
-                    <MenuItem onPress={showAbout} textStyle={Styles.menuItemTextStyle}>About</MenuItem>
+                    <MenuItem onPress={showAbout} textStyle={Styles.menuItemTextStyle} style={Styles.menuItemStyle}>
+                        <MaterialCommunityIcons name='information-outline' /> About
+                    </MenuItem>
                 </Menu>
                 </View>
             </SafeAreaView>
