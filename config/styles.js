@@ -46,15 +46,13 @@ export default {
         position: 'absolute',
     },
     touchableButton: {
-        padding: 10
+        padding: 10,
     },
     menuStyle: {
         backgroundColor: Colours.dark_yellow,
     },
-    menuItemStyle: {
-    },
+    menuItemStyle: {},
     menuItemTextStyle: {
         color: 'white',
     },
-    
 }
