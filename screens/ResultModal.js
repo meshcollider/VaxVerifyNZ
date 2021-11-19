@@ -10,7 +10,6 @@ import AppLoading from 'expo-app-loading'
 import { MaterialIcons, MaterialCommunityIcons } from '@expo/vector-icons'
 
 import '../config/polyfills'
-import Texture from '../assets/images/texture.png'
 import Styles from '../config/styles'
 import Colours from '../config/colours'
 import useFonts from '../config/useFonts'
@@ -80,8 +79,9 @@ export default function ResultModal({ route, navigation }) {
 
     if (!result.success) {
         return (
-                <View style={Styles.badgeContainer}>
-                    <View style={Styles.errorBadge}>
+            <View style={Styles.badgeContainer}>
+                <View>
+                <View style={Styles.errorBadge}>
                         <Text style={Styles.errorBadgeText}>
                             <MaterialCommunityIcons
                                 size={30}
@@ -115,12 +115,14 @@ export default function ResultModal({ route, navigation }) {
                         </Text>
                     </TouchableOpacity>
                 </View>
+            </View>
         )
     }
 
     const subject = result.credentialSubject
     return (
-            <View style={Styles.badgeContainer}>
+        <View style={Styles.badgeContainer}>
+            <View>
                 <View style={Styles.successBadge}>
                     <Text style={Styles.successBadgeText}>
                         <MaterialCommunityIcons
@@ -158,5 +160,6 @@ export default function ResultModal({ route, navigation }) {
                     </Text>
                 </TouchableOpacity>
             </View>
+        </View>
     )
 }

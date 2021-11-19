@@ -17,7 +17,6 @@ import { Menu, MenuItem, MenuDivider } from 'react-native-material-menu'
 import { StatusBar } from 'expo-status-bar'
 import Constants from 'expo-constants'
 
-import Texture from '../assets/images/texture.png'
 import ScanCamera from '../components/Camera'
 import Styles from '../config/styles'
 import Colours from '../config/colours'
