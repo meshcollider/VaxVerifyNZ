@@ -10,6 +10,9 @@ export default {
         justifyContent: 'center',
         alignItems: 'center',
     },
+    iconText: {
+        lineHeight: 60,
+    },
     cameraText: {
         fontFamily: 'WorkSans_Bold',
         fontSize: 25,
@@ -88,7 +91,7 @@ export default {
     },
     menuItemTextStyle: {
         color: 'white',
-        fontFamily: 'WorkSans_Medium',
+        fontFamily: 'WorkSans_SemiBold',
         fontSize: 15,
     },
     centeredView: {
@@ -137,14 +140,14 @@ export default {
         textAlign: 'center',
         fontFamily: 'WorkSans_Medium',
         fontSize: 15,
-        lineHeight: 30,
+        lineHeight: 35,
         color: 'black',
     },
     devLink: {
         backgroundColor: Colours.light_yellow,
         color: Colours.dark_yellow,
         fontSize: 17,
-        lineHeight: 28,
+        lineHeight: 30,
         fontFamily: 'WorkSans_Bold',
     },
     bold: {
