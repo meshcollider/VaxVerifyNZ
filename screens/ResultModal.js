@@ -128,7 +128,7 @@ export default function ResultModal({ route, navigation }) {
                 <View style={Styles.cardBack}>
                     <View style={Styles.card}>
                         <Text style={Styles.cardTitle}>NZ Covid Pass</Text>
-                        <Text style={Styles.cardText}>
+                        <Text style={Styles.cardText} adjustsFontSizeToFit numberOfLines={6}>
                             {<Text style={Styles.bold}>Name:</Text>}
                             {'\n'}
                             {subject.givenName} {subject.familyName}
