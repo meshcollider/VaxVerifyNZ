@@ -48,4 +48,11 @@ export default {
     touchableButton: {
         padding: 10
     },
+    menuStyle: {
+        backgroundColor: Colours.dark_yellow,
+    },
+    menuItemTextStyle: {
+        color: 'white',
+    },
+    
 }

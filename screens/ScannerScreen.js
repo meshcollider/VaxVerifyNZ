@@ -5,8 +5,10 @@ import { MaterialCommunityIcons } from '@expo/vector-icons'
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import { Menu, MenuItem, MenuDivider } from 'react-native-material-menu';
 
-import ScanCamera from '../components/Camera.js'
-import Styles from '../config/styles.js'
+
+import ScanCamera from '../components/Camera'
+import Styles from '../config/styles'
+import Colours from '../config/colours'
 
 export default function ScannerScreen({ navigation }) {
     const isFocused = useIsFocused()
@@ -54,10 +56,11 @@ export default function ScannerScreen({ navigation }) {
                         </TouchableOpacity>
                     }
                     onRequestClose={hideMenu}
+                    style={Styles.menuStyle}
                 >
-                    <MenuItem onPress={toggleVibrate}>Turn {shouldVibrate ? 'off' : 'on'} vibration</MenuItem>
-                    <MenuDivider />
-                    <MenuItem onPress={showAbout}>About</MenuItem>
+                    <MenuItem onPress={toggleVibrate} textStyle={Styles.menuItemTextStyle}>Turn {shouldVibrate ? 'off' : 'on'} vibration</MenuItem>
+                    <MenuDivider color={Colours.light_yellow} />
+                    <MenuItem onPress={showAbout} textStyle={Styles.menuItemTextStyle}>About</MenuItem>
                 </Menu>
                 </View>
             </SafeAreaView>
