@@ -22,8 +22,9 @@ export default function ScannerScreen({ navigation }) {
     }, [])
 
     const toggleVibrate = async () => {
-        setVibrate(!shouldVibrate)
-        await AsyncStorage.setItem('@vaxverifynz-vibrate', JSON.stringify(shouldVibrate))
+        const newShouldVibrate = !shouldVibrate
+        setVibrate(newShouldVibrate)
+        await AsyncStorage.setItem('@vaxverifynz-vibrate', JSON.stringify(newShouldVibrate))
     }
 
     const hideMenu = () => setMenuVisible(false)
