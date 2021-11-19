@@ -14,7 +14,7 @@ import Styles from '../config/styles'
 import Colours from '../config/colours'
 import useFonts from '../config/useFonts'
 
-import { verifyPassURI } from '@vaxxnz/nzcp'
+import { verifyPassURIOffline } from '@vaxxnz/nzcp'
 import { NavigationEvents } from 'react-navigation'
 
 function ErrorMessage(props) {
@@ -53,7 +53,7 @@ export default function ResultModal({ route, navigation }) {
 
     React.useEffect(() => {
         ;(async () => {
-            const result = await verifyPassURI(data)
+            const result = await verifyPassURIOffline(data)
             setResult(result)
             setProcessed(true)
         })()
