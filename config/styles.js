@@ -74,7 +74,9 @@ export default {
     menuStyle: {
         backgroundColor: Colours.dark_yellow,
     },
-    menuItemStyle: {},
+    menuItemStyle: {
+        minWidth: '100%',
+    },
     menuItemTextStyle: {
         color: 'white',
     },
