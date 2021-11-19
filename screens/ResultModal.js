@@ -15,7 +15,6 @@ import Colours from '../config/colours'
 import useFonts from '../config/useFonts'
 
 import { verifyPassURIOffline } from '@vaxxnz/nzcp'
-import { NavigationEvents } from 'react-navigation'
 
 function ErrorMessage(props) {
     const section = props.violates.section
