@@ -124,26 +124,6 @@ export default function ScannerScreen({ navigation }) {
                                 </Text>
                             }
                             {'\n'}
-                            with{' '}
-                            <Text
-                                style={[Styles.aboutText, Styles.bold]}
-                                onPress={() => {
-                                    Linking.openURL('https://expo.dev')
-                                }}
-                            >
-                                Expo
-                            </Text>{' '}
-                            &{' '}
-                            <Text
-                                style={[Styles.aboutText, Styles.bold]}
-                                onPress={() => {
-                                    Linking.openURL('https://github.com/vaxxnz/nzcp-js')
-                                }}
-                            >
-                                nzcp-js
-                            </Text>
-                            .{'\n'}
-                            {'\n'}
                             {
                                 <Text
                                     onPress={() => {
@@ -152,12 +132,15 @@ export default function ScannerScreen({ navigation }) {
                                         )
                                     }}
                                 >
-                                    <MaterialCommunityIcons size={30} name="github" />
+                                    <MaterialCommunityIcons
+                                        size={30}
+                                        style={Styles.iconText}
+                                        name="github"
+                                    />
                                 </Text>
                             }
-                            {'\n'}
                         </Text>
-                        <Pressable style={[Styles.textButton]} onPress={hideAbout}>
+                        <Pressable style={Styles.textButton} onPress={hideAbout}>
                             <Text style={Styles.buttonText}>Back</Text>
                         </Pressable>
                     </View>

@@ -1,8 +1,11 @@
 import * as React from 'react'
-import { StyleSheet, Text, View, ActivityIndicator } from 'react-native'
+import { StyleSheet, Text, View, ActivityIndicator, ImageBackground } from 'react-native'
 
 import '../config/polyfills'
+import Texture from '../assets/images/texture.png'
+import Styles from '../config/styles'
 import Colours from '../config/colours'
+import useFonts from '../config/useFonts'
 
 import { verifyPassURI } from '@vaxxnz/nzcp'
 
@@ -10,7 +13,7 @@ function ErrorMessage(props) {
     const section = props.violates.section
     const message = props.violates.message
 
-    errorMessage = message + ' (Section: ' + section + ')'
+    var errorMessage = message + ' (Section: ' + section + ')'
     if (section === '4.4' || section === '4.5') {
         errorMessage = 'This QR code is not a valid NZ COVID Pass.'
     } else if (section === '2.1.0.3.4') {
@@ -33,22 +36,25 @@ function ErrorMessage(props) {
 function SuccessData(props) {
     const subject = props.subject
     return (
-        <View style={styles.container}>
-            <View style={styles.card}>
-                <Text style={styles.title}>Success</Text>
-                <Text>
-                    Name: {subject.givenName} {subject.familyName}
-                </Text>
-                <Text>Date of birth: {subject.dob}</Text>
-            </View>
+        <View style={Styles.card}>
+            <Text style={styles.title}>Success</Text>
+            <Text>
+                Name: {subject.givenName} {subject.familyName}
+            </Text>
+            <Text>Date of birth: {subject.dob}</Text>
         </View>
     )
 }
 
 export default function ResultModal({ route, navigation }) {
+    const [isReady, setIsReady] = React.useState(false)
     const { data } = route.params
     const [processed, setProcessed] = React.useState(false)
     const [result, setResult] = React.useState(null)
+
+    const LoadFonts = async () => {
+        await useFonts()
+    }
 
     React.useEffect(() => {
         ;(async () => {
@@ -58,28 +64,38 @@ export default function ResultModal({ route, navigation }) {
         })()
     }, [])
 
+    if (!isReady) {
+        return (
+            <AppLoading
+                startAsync={LoadFonts}
+                onFinish={() => setIsReady(true)}
+                onError={() => {}}
+            />
+        )
+    }
+
     if (!processed) {
         return (
-            <View style={styles.container}>
+            <ImageBackground source={Texture} resizeMode="repeat" style={styles.container}>
                 <ActivityIndicator size="large" />
-            </View>
+            </ImageBackground>
         )
     }
 
     if (!result.success) {
         return (
-            <View style={styles.container}>
+            <ImageBackground source={Texture} resizeMode="repeat" style={styles.container}>
                 <Text style={styles.title}>Invalid Code</Text>
                 <ErrorMessage violates={result.violates} data={data} />
-            </View>
+            </ImageBackground>
         )
     }
 
     const subject = result.credentialSubject
     return (
-        <View style={styles.container}>
+        <ImageBackground source={Texture} resizeMode="repeat" style={styles.container}>
             <SuccessData subject={subject} />
-        </View>
+        </ImageBackground>
     )
 }
 
