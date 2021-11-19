@@ -6,9 +6,9 @@ import Styles from '../config/styles'
 
 export default function AboutModal() {
     return (
-        <View style={Styles.container}>
+        <View style={Styles.backgroundContainer}>
             <Text style={Styles.title}>About Vax Verify NZ</Text>
-            <View style={Styles.separator} lightColor="#eee" darkColor="rgba(255,255,255,0.1)" />
+            <View style={Styles.separator} />
             <Text style={Styles.text}>
                 Unofficial, open source NZ Vaccination Passport verification app.
                 {'\n\n'}Developed by Samuel Dobson and Joshua Soong

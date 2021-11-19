@@ -79,14 +79,14 @@ export default function ScanCamera(props) {
 
     if (hasPermission === null) {
         return (
-            <SafeAreaView style={Styles.container}>
-                <ActivityIndicator size="large" />
+            <SafeAreaView style={Styles.backgroundContainer}>
+                <ActivityIndicator color='white' size="large" />
             </SafeAreaView>
         )
     }
     if (hasPermission === false) {
         return (
-            <SafeAreaView style={Styles.container}>
+            <SafeAreaView style={Styles.backgroundContainer}>
                 <Text style={Styles.text}>
                     Access to camera is required to scan vaccination passport QR codes.
                 </Text>

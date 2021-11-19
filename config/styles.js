@@ -1,23 +1,32 @@
 import Colours from './colours'
-import { Dimensions } from 'react-native'
+import { Dimensions, StyleSheet } from 'react-native'
 export default {
     container: {
         flex: 1,
         justifyContent: 'center',
+    },
+    backgroundContainer: {
+        flex: 1,
+        justifyContent: 'center',
+        backgroundColor: Colours.dark_yellow,
         alignItems: 'center',
     },
     text: {
         textAlign: 'center',
         width: '90%',
+        color: 'white',
     },
     title: {
         fontSize: 20,
         fontWeight: 'bold',
+        color: 'white',
     },
     separator: {
         marginVertical: 30,
         height: 1,
         width: '80%',
+        borderBottomColor: Colours.light_yellow,
+        borderBottomWidth: StyleSheet.hairlineWidth,
     },
     buttonContainer: {
         alignSelf: 'flex-end',
