@@ -1,5 +1,14 @@
 import * as React from 'react'
-import { StyleSheet, Text, View, ActivityIndicator, ImageBackground } from 'react-native'
+import {
+    StyleSheet,
+    Text,
+    View,
+    ActivityIndicator,
+    ImageBackground,
+    TouchableOpacity,
+} from 'react-native'
+import AppLoading from 'expo-app-loading'
+import { MaterialIcons, MaterialCommunityIcons } from '@expo/vector-icons'
 
 import '../config/polyfills'
 import Texture from '../assets/images/texture.png'
@@ -8,6 +17,7 @@ import Colours from '../config/colours'
 import useFonts from '../config/useFonts'
 
 import { verifyPassURI } from '@vaxxnz/nzcp'
+import { NavigationEvents } from 'react-navigation'
 
 function ErrorMessage(props) {
     const section = props.violates.section
@@ -33,19 +43,6 @@ function ErrorMessage(props) {
     )
 }
 
-function SuccessData(props) {
-    const subject = props.subject
-    return (
-        <View style={Styles.card}>
-            <Text style={styles.title}>Success</Text>
-            <Text>
-                Name: {subject.givenName} {subject.familyName}
-            </Text>
-            <Text>Date of birth: {subject.dob}</Text>
-        </View>
-    )
-}
-
 export default function ResultModal({ route, navigation }) {
     const [isReady, setIsReady] = React.useState(false)
     const { data } = route.params
@@ -64,6 +61,14 @@ export default function ResultModal({ route, navigation }) {
         })()
     }, [])
 
+    if (!processed) {
+        return (
+            <ImageBackground source={Texture} resizeMode="repeat" style={Styles.container}>
+                <ActivityIndicator size="large" />
+            </ImageBackground>
+        )
+    }
+
     if (!isReady) {
         return (
             <AppLoading
@@ -74,48 +79,89 @@ export default function ResultModal({ route, navigation }) {
         )
     }
 
-    if (!processed) {
-        return (
-            <ImageBackground source={Texture} resizeMode="repeat" style={styles.container}>
-                <ActivityIndicator size="large" />
-            </ImageBackground>
-        )
-    }
-
     if (!result.success) {
         return (
-            <ImageBackground source={Texture} resizeMode="repeat" style={styles.container}>
-                <Text style={styles.title}>Invalid Code</Text>
-                <ErrorMessage violates={result.violates} data={data} />
+            <ImageBackground source={Texture} resizeMode="repeat" style={Styles.container}>
+                <View>
+                    <View style={Styles.errorBadge}>
+                        <Text style={Styles.errorBadgeText}>
+                            <MaterialCommunityIcons
+                                size={30}
+                                style={Styles.errorBadgeText}
+                                name="eye"
+                            />{' '}
+                            Scan Complete
+                        </Text>
+                    </View>
+                    <View style={Styles.errorCardBack}>
+                        <View style={Styles.card}>
+                            <Text style={Styles.cardTitle}>Pass Not Recognised</Text>
+                            <Text style={Styles.cardText}>
+                                {<Text style={Styles.bold}>Error:</Text>}
+                                {'\n'}
+                                {<ErrorMessage violates={result.violates} data={data} />}
+                            </Text>
+                        </View>
+                    </View>
+                    <TouchableOpacity
+                        style={Styles.backButton}
+                        onPress={() => navigation.navigate('Root')}
+                    >
+                        <Text style={Styles.backButtonLabel}>
+                            <MaterialCommunityIcons
+                                size={30}
+                                style={Styles.backButtonLabel}
+                                name={'arrow-left'}
+                            />{' '}
+                            Return
+                        </Text>
+                    </TouchableOpacity>
+                </View>
             </ImageBackground>
         )
     }
 
     const subject = result.credentialSubject
     return (
-        <ImageBackground source={Texture} resizeMode="repeat" style={styles.container}>
-            <SuccessData subject={subject} />
+        <ImageBackground source={Texture} resizeMode="repeat" style={Styles.container}>
+            <View>
+                <View style={Styles.successBadge}>
+                    <Text style={Styles.successBadgeText}>
+                        <MaterialCommunityIcons
+                            size={30}
+                            style={Styles.successBadgeText}
+                            name="eye"
+                        />{' '}
+                        Scan Complete
+                    </Text>
+                </View>
+                <View style={Styles.cardBack}>
+                    <View style={Styles.card}>
+                        <Text style={Styles.cardTitle}>NZ Covid Pass</Text>
+                        <Text style={Styles.cardText}>
+                            {<Text style={Styles.bold}>Name:</Text>}
+                            {'\n'}
+                            {subject.givenName} {subject.familyName}
+                            {'\n'}
+                            {'\n'}
+                            {<Text style={Styles.bold}>Date of Birth:</Text>} {subject.dob}
+                        </Text>
+                    </View>
+                </View>
+                <TouchableOpacity
+                    style={Styles.backButton}
+                    onPress={() => navigation.navigate('Root')}
+                >
+                    <Text style={Styles.backButtonLabel}>
+                        <MaterialCommunityIcons
+                            size={30}
+                            style={Styles.backButtonLabel}
+                            name={'arrow-left'}
+                        />{' '}
+                        Return
+                    </Text>
+                </TouchableOpacity>
+            </View>
         </ImageBackground>
     )
 }
-
-const styles = StyleSheet.create({
-    container: {
-        flex: 1,
-        alignItems: 'center',
-        justifyContent: 'center',
-    },
-    content: {
-        width: '90%',
-        textAlign: 'center',
-    },
-    title: {
-        fontSize: 20,
-        fontWeight: 'bold',
-    },
-    separator: {
-        marginVertical: 30,
-        height: 1,
-        width: '80%',
-    },
-})
