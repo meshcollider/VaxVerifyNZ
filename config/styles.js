@@ -8,12 +8,13 @@ export default {
     backgroundContainer: {
         flex: 1,
         justifyContent: 'center',
-        backgroundColor: Colours.dark_yellow,
         alignItems: 'center',
     },
-    text: {
+    cameraText: {
+        fontFamily: 'WorkSans_Bold',
+        fontSize: 25,
         textAlign: 'center',
-        width: '90%',
+        width: '70%',
         color: 'white',
     },
     title: {

@@ -1,6 +1,5 @@
-import { StatusBar } from 'expo-status-bar'
 import * as React from 'react'
-import { Platform, StyleSheet, Text, View, ActivityIndicator } from 'react-native'
+import { StyleSheet, Text, View, ActivityIndicator } from 'react-native'
 
 import '../config/polyfills'
 
@@ -12,13 +11,15 @@ function ErrorMessage(props) {
 
     errorMessage = message + ' (Section: ' + section + ')'
     if (section === '4.4' || section === '4.5') {
-        errorMessage = 'QR code is not a valid NZ Covid Pass'
+        errorMessage = 'This QR code is not a valid NZ COVID Pass.'
     } else if (section === '2.1.0.3.4') {
-        errorMessage = 'Covid Pass is expired'
-    } else if (section === '2.1.0.3.4') {
-        errorMessage = 'Covid Pass is not yet activated'
+        errorMessage = 'This COVID Pass has expired.'
+    } else if (section === '2.1.0.3.3') {
+        errorMessage = 'This COVID Pass is not yet activated.'
     } else if (section === '6.3' || section === '5.1.1') {
-        errorMessage = 'This Covid Pass was not issued by the NZ Ministry of Health'
+        errorMessage = 'This Covid Pass was not issued by the NZ Ministry of Health.'
+    } else if (section === '3' || section === '4.7') {
+        errorMessage = 'This Covid Pass is malformed or has been modified.'
     }
 
     return (
@@ -32,10 +33,13 @@ function SuccessData(props) {
     const subject = props.subject
     return (
         <View style={styles.container}>
-            <Text style={styles.title}>Success</Text>
-            <Text>Given name: {subject.givenName}</Text>
-            <Text>Family name: {subject.familyName}</Text>
-            <Text>Date of birth: {subject.dob}</Text>
+            <View style={styles.card}>
+                <Text style={styles.title}>Success</Text>
+                <Text>
+                    Name: {subject.givenName} {subject.familyName}
+                </Text>
+                <Text>Date of birth: {subject.dob}</Text>
+            </View>
         </View>
     )
 }
@@ -64,7 +68,6 @@ export default function ResultModal({ route, navigation }) {
     if (!result.success) {
         return (
             <View style={styles.container}>
-                <StatusBar backgroundColor={Colours.white} barStyle="dark-content" />
                 <Text style={styles.title}>Invalid Code</Text>
                 <ErrorMessage violates={result.violates} data={data} />
             </View>
@@ -75,9 +78,6 @@ export default function ResultModal({ route, navigation }) {
     return (
         <View style={styles.container}>
             <SuccessData subject={subject} />
-
-            {/* Use a light status bar on iOS to account for the black space above the modal */}
-            <StatusBar style={Platform.OS === 'ios' ? 'light' : 'auto'} />
         </View>
     )
 }

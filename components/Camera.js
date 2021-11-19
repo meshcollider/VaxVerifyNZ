@@ -7,6 +7,7 @@ import {
     TouchableOpacity,
     Dimensions,
     ActivityIndicator,
+    ImageBackground,
 } from 'react-native'
 
 import { Camera } from 'expo-camera'
@@ -16,6 +17,7 @@ import { MaterialIcons, MaterialCommunityIcons } from '@expo/vector-icons'
 
 import Styles from '../config/styles.js'
 import Colours from '../config/colours.js'
+import Texture from '../assets/images/texture.png'
 
 export default function ScanCamera(props) {
     const [hasPermission, setHasPermission] = React.useState(null)
@@ -79,18 +81,26 @@ export default function ScanCamera(props) {
 
     if (hasPermission === null) {
         return (
-            <SafeAreaView style={Styles.backgroundContainer}>
-                <ActivityIndicator color='white' size="large" />
-            </SafeAreaView>
+            <ImageBackground
+                source={Texture}
+                resizeMode="repeat"
+                style={Styles.backgroundContainer}
+            >
+                <ActivityIndicator color="white" size="large" />
+            </ImageBackground>
         )
     }
     if (hasPermission === false) {
         return (
-            <SafeAreaView style={Styles.backgroundContainer}>
-                <Text style={Styles.text}>
+            <ImageBackground
+                source={Texture}
+                resizeMode="repeat"
+                style={Styles.backgroundContainer}
+            >
+                <Text style={Styles.cameraText}>
                     Access to camera is required to scan vaccination passport QR codes.
                 </Text>
-            </SafeAreaView>
+            </ImageBackground>
         )
     }
 
