@@ -29,6 +29,10 @@
             "package": "com.meshcollider.vaxverifynz",
             "versionCode": 1
         },
+        "androidNavigationBar": {
+            "barStyle": "dark-content",
+            "backgroundColor": "#000000"
+        },
         "web": {
             "favicon": "./assets/images/favicon.png"
         }

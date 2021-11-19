@@ -5,7 +5,6 @@ import { createNativeStackNavigator } from '@react-navigation/native-stack'
 import * as ScreenOrientation from 'expo-screen-orientation'
 
 import ScannerScreen from './screens/ScannerScreen'
-import AboutModal from './screens/AboutModal'
 import ResultModal from './screens/ResultModal'
 
 ScreenOrientation.lockAsync(ScreenOrientation.OrientationLock.PORTRAIT_UP)
@@ -19,19 +18,14 @@ export default function App() {
                 <Stack.Navigator>
                     <Stack.Screen
                         name="Root"
-                        component={ScannerScreen}
                         options={{ headerShown: false }}
+                        component={ScannerScreen}
                     />
-                    <Stack.Group screenOptions={{ presentation: 'modal' }}>
-                        <Stack.Screen
-                            name="About"
-                            component={AboutModal}
-                            options={{ headerShown: false }} 
-                        />
-                    </Stack.Group>
-                    <Stack.Group screenOptions={{ presentation: 'modal' }}>
-                        <Stack.Screen name="ScanResult" component={ResultModal} />
-                    </Stack.Group>
+                    <Stack.Screen
+                        name="ScanResult"
+                        options={{ headerShown: false, presentation: 'modal' }}
+                        component={ResultModal}
+                    />
                 </Stack.Navigator>
             </NavigationContainer>
         </SafeAreaProvider>

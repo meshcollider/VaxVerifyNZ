@@ -1,18 +1,36 @@
 import * as React from 'react'
-import { View, Vibration, SafeAreaView, Text, TouchableOpacity } from 'react-native'
+import AppLoading from 'expo-app-loading'
+import {
+    View,
+    Modal,
+    Vibration,
+    Pressable,
+    Linking,
+    SafeAreaView,
+    Text,
+    TouchableOpacity,
+} from 'react-native'
 import { useIsFocused } from '@react-navigation/native'
-import { MaterialCommunityIcons } from '@expo/vector-icons'
+import { MaterialIcons, MaterialCommunityIcons } from '@expo/vector-icons'
 import AsyncStorage from '@react-native-async-storage/async-storage'
 import { Menu, MenuItem, MenuDivider } from 'react-native-material-menu'
 
 import ScanCamera from '../components/Camera'
 import Styles from '../config/styles'
 import Colours from '../config/colours'
+import useFonts from '../config/useFonts'
+import Constants from 'expo-constants'
 
 export default function ScannerScreen({ navigation }) {
+    const [aboutVisible, setAboutVisible] = React.useState(false)
+    const [isReady, setIsReady] = React.useState(false)
     const isFocused = useIsFocused()
     const [shouldVibrate, setVibrate] = React.useState(true)
     const [menuVisible, setMenuVisible] = React.useState(false)
+
+    const LoadFonts = async () => {
+        await useFonts()
+    }
 
     React.useEffect(() => {
         ;(async () => {
@@ -29,6 +47,8 @@ export default function ScannerScreen({ navigation }) {
 
     const hideMenu = () => setMenuVisible(false)
     const showMenu = () => setMenuVisible(true)
+    const hideAbout = () => setAboutVisible(false)
+    const showAbout = () => setAboutVisible(true)
 
     const handleBarCodeScanned = ({ type, data }) => {
         if (shouldVibrate) {
@@ -37,20 +57,113 @@ export default function ScannerScreen({ navigation }) {
         navigation.navigate('ScanResult', { data: data })
     }
 
-    const showAbout = () => {
-        navigation.navigate('About')
+    if (!isReady) {
+        return (
+            <AppLoading
+                startAsync={LoadFonts}
+                onFinish={() => setIsReady(true)}
+                onError={() => {}}
+            />
+        )
     }
 
     return (
         <View style={Styles.container}>
+            <Modal
+                animationType="slide"
+                transparent={true}
+                visible={aboutVisible}
+                onRequestClose={() => {
+                    setAboutVisible(!aboutVisible)
+                }}
+            >
+                <View style={Styles.centeredView}>
+                    <View style={Styles.aboutView}>
+                        <Text style={Styles.aboutTitle}>VaxVerifyNZ</Text>
+                        <Text style={Styles.aboutVersion}>
+                            {' '}
+                            Version{' '}
+                            {Constants.nativeAppVersion === null
+                                ? 'X.x.x'
+                                : Constants.nativeAppVersion}
+                        </Text>
+                        <Text style={Styles.aboutText}>
+                            Made with 💖 in {<Text style={Styles.bold}>2 days</Text>} by
+                            {'\n'}
+                            {
+                                <Text
+                                    style={Styles.devLink}
+                                    onPress={() => {
+                                        Linking.openURL('https://github.com/meshcollider')
+                                    }}
+                                >
+                                    {' '}
+                                    Samuel Dobson{' '}
+                                </Text>
+                            }
+                            {'\n'}
+                            {<Text style={Styles.bold}>&</Text>}
+                            {'\n'}
+                            {
+                                <Text
+                                    style={Styles.devLink}
+                                    onPress={() => {
+                                        Linking.openURL('https://joshsoong.design')
+                                    }}
+                                >
+                                    {' '}
+                                    Joshua Soong{' '}
+                                </Text>
+                            }
+                            {'\n'}
+                            with{' '}
+                            <Text
+                                style={[Styles.aboutText, Styles.bold]}
+                                onPress={() => {
+                                    Linking.openURL('https://expo.dev')
+                                }}
+                            >
+                                Expo
+                            </Text>{' '}
+                            &{' '}
+                            <Text
+                                style={[Styles.aboutText, Styles.bold]}
+                                onPress={() => {
+                                    Linking.openURL('https://github.com/vaxxnz/nzcp-js')
+                                }}
+                            >
+                                nzcp-js
+                            </Text>
+                            .{'\n'}
+                            {'\n'}
+                            {
+                                <Text
+                                    onPress={() => {
+                                        Linking.openURL(
+                                            'https://github.com/meshcollider/VaxVerifyNZ'
+                                        )
+                                    }}
+                                >
+                                    <MaterialCommunityIcons size={30} name="github" />
+                                </Text>
+                            }
+                            {'\n'}
+                        </Text>
+                        <Pressable style={[Styles.textButton]} onPress={hideAbout}>
+                            <Text style={Styles.buttonText}>Back</Text>
+                        </Pressable>
+                    </View>
+                </View>
+            </Modal>
             <SafeAreaView style={Styles.settingsBox}>
                 <View style={Styles.settingsButton}>
                     <Menu
+                        animationDuration={100}
                         visible={menuVisible}
                         anchor={
                             <TouchableOpacity onPress={showMenu} style={Styles.touchableButton}>
                                 <Text style={Styles.touchableButtonLabel}>
-                                    <MaterialCommunityIcons size={30} name="dots-vertical" />
+                                    <MaterialIcons size={30} name="expand-more" />
                                 </Text>
                             </TouchableOpacity>
                         }
@@ -62,19 +175,19 @@ export default function ScannerScreen({ navigation }) {
                             textStyle={Styles.menuItemTextStyle}
                             style={Styles.menuItemStyle}
                         >
-                            <MaterialCommunityIcons
-                                name={shouldVibrate ? 'vibrate-off' : 'vibrate'}
-                            />{' '}
                             Turn {shouldVibrate ? 'off' : 'on'} vibration
                         </MenuItem>
 
                         <MenuDivider color={Colours.light_yellow} />
                         <MenuItem
-                            onPress={showAbout}
+                            onPress={() => {
+                                setAboutVisible(true)
+                                hideMenu
+                            }}
                             textStyle={Styles.menuItemTextStyle}
                             style={Styles.menuItemStyle}
                         >
-                            <MaterialCommunityIcons name="information-outline" /> About
+                            About
                         </MenuItem>
                     </Menu>
                 </View>

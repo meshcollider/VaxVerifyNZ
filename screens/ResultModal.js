@@ -9,7 +9,7 @@ import { verifyPassURI } from '@vaxxnz/nzcp'
 function ErrorMessage(props) {
     const section = props.violates.section
     const message = props.violates.message
-    
+
     errorMessage = message + ' (Section: ' + section + ')'
     if (section === '4.4' || section === '4.5') {
         errorMessage = 'QR code is not a valid NZ Covid Pass'
@@ -17,21 +17,15 @@ function ErrorMessage(props) {
         errorMessage = 'Covid Pass is expired'
     } else if (section === '2.1.0.3.4') {
         errorMessage = 'Covid Pass is not yet activated'
-    } else if (section ==='6.3' || section === '5.1.1') {
+    } else if (section === '6.3' || section === '5.1.1') {
         errorMessage = 'This Covid Pass was not issued by the NZ Ministry of Health'
     }
 
     return (
         <>
-            <Text>
-                errorMessage
-            </Text>
+            <Text>errorMessage</Text>
         </>
     )
-}
-
-function ExpiredPass(props) {
-    
 }
 
 function SuccessData(props) {
@@ -70,10 +64,9 @@ export default function ResultModal({ route, navigation }) {
     if (!result.success) {
         return (
             <View style={styles.container}>
+                <StatusBar backgroundColor={Colours.white} barStyle="dark-content" />
                 <Text style={styles.title}>Invalid Code</Text>
                 <ErrorMessage violates={result.violates} data={data} />
-                {/* Use a light status bar on iOS to account for the black space above the modal */}
-                <StatusBar style={Platform.OS === 'ios' ? 'light' : 'auto'} />
             </View>
         )
     }
