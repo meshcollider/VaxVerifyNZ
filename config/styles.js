@@ -33,7 +33,6 @@ export default {
     settingsButton: {
         top: 20,
         right: 5,
-        padding: 10,
         alignSelf: 'flex-end',
         position: 'absolute',
         textAlign: 'center',
@@ -45,5 +44,8 @@ export default {
         top: 20,
         right: 5,
         position: 'absolute',
+    },
+    touchableButton: {
+        padding: 10
     },
 }

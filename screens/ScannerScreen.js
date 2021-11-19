@@ -47,9 +47,11 @@ export default function ScannerScreen({ navigation }) {
                 <Menu
                     visible={menuVisible}
                     anchor={
-                            <Text onPress={showMenu} style={Styles.buttonLabel}>
+                        <TouchableOpacity onPress={showMenu} style={Styles.touchableButton}>
+                            <Text style={Styles.buttonLabel}>
                                 <MaterialCommunityIcons size={30} name="dots-vertical" />
                             </Text>
+                        </TouchableOpacity>
                     }
                     onRequestClose={hideMenu}
                 >
