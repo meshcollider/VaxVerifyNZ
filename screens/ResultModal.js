@@ -1,17 +1,10 @@
 import * as React from 'react'
-import {
-    StyleSheet,
-    Text,
-    View,
-    ActivityIndicator,
-    TouchableOpacity,
-} from 'react-native'
+import { Text, View, ActivityIndicator, TouchableOpacity } from 'react-native'
 import AppLoading from 'expo-app-loading'
-import { MaterialIcons, MaterialCommunityIcons } from '@expo/vector-icons'
+import { MaterialCommunityIcons } from '@expo/vector-icons'
 
 import '../config/polyfills'
 import Styles from '../config/styles'
-import Colours from '../config/colours'
 import useFonts from '../config/useFonts'
 
 import { verifyPassURIOffline } from '@vaxxnz/nzcp'
@@ -52,7 +45,7 @@ export default function ResultModal({ route, navigation }) {
 
     React.useEffect(() => {
         ;(async () => {
-            const result = await verifyPassURIOffline(data)
+            const result = verifyPassURIOffline(data)
             setResult(result)
             setProcessed(true)
         })()
@@ -80,7 +73,7 @@ export default function ResultModal({ route, navigation }) {
         return (
             <View style={Styles.badgeContainer}>
                 <View>
-                <View style={Styles.errorBadge}>
+                    <View style={Styles.errorBadge}>
                         <Text style={Styles.errorBadgeText}>
                             <MaterialCommunityIcons
                                 size={30}

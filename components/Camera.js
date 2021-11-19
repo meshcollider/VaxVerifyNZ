@@ -2,7 +2,6 @@ import * as React from 'react'
 import {
     StyleSheet,
     View,
-    SafeAreaView,
     Text,
     TouchableOpacity,
     Dimensions,
@@ -16,7 +15,6 @@ import { MaterialIcons, MaterialCommunityIcons } from '@expo/vector-icons'
 
 import Styles from '../config/styles.js'
 import Colours from '../config/colours.js'
-import Texture from '../assets/images/texture.png'
 
 export default function ScanCamera(props) {
     const [hasPermission, setHasPermission] = React.useState(null)
@@ -24,18 +22,13 @@ export default function ScanCamera(props) {
     const [cameraType, setCameraType] = React.useState(Camera.Constants.Type.back)
     const [flashMode, setFlashMode] = React.useState(Camera.Constants.FlashMode.off)
 
-    // Screen Ratio and image padding
     const [imagePadding, setImagePadding] = React.useState(0)
     const [ratio, setRatio] = React.useState('4:3') // default is 4:3
     const { height, width } = Dimensions.get('window')
-    const screenRatio = height / width
     const [isRatioSet, setIsRatioSet] = React.useState(false)
 
-    // set the camera ratio and padding.
-    // this code assumes a portrait mode screen
     const prepareRatio = async () => {
-        let desiredRatio = '4:3' // Start with the system default
-        // This issue only affects Android
+        let desiredRatio = '4:3'
         if (Platform.OS === 'android') {
             const ratios = await camera.getSupportedRatiosAsync()
             let distances = {}
@@ -64,7 +57,6 @@ export default function ScanCamera(props) {
         }
     }
 
-    // the camera must be loaded in order to access the supported ratios
     const setCameraReady = async () => {
         if (!isRatioSet) {
             await prepareRatio()
