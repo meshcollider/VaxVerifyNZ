@@ -98,7 +98,7 @@ export default function ScanCamera(props) {
             }}
             onBarCodeScanned={props.resultHandler}
             type={cameraType}
-            barCodeTypes={[BarCodeScanner.Constants.BarCodeType.qr]}
+            barCodeScannerSettings={{barCodeTypes: [BarCodeScanner.Constants.BarCodeType.qr]}}
             flashMode={flashMode}
             style={[
                 StyleSheet.absoluteFillObject,
