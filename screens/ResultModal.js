@@ -2,6 +2,7 @@ import * as React from 'react'
 import { StyleSheet, Text, View, ActivityIndicator } from 'react-native'
 
 import '../config/polyfills'
+import Colours from '../config/colours'
 
 import { verifyPassURI } from '@vaxxnz/nzcp'
 
@@ -24,7 +25,7 @@ function ErrorMessage(props) {
 
     return (
         <>
-            <Text>errorMessage</Text>
+            <Text>{errorMessage}</Text>
         </>
     )
 }
