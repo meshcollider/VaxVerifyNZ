@@ -27,7 +27,7 @@ export default {
         marginTop: 20,
     },
     buttonLabel: {
-        color: Colours.light_yellow,
+        color: Colours.dark_yellow,
         textAlign: 'center',
     },
     settingsButton: {
@@ -47,6 +47,9 @@ export default {
     },
     touchableButton: {
         padding: 10,
+    },
+    touchableButtonLabel: {
+        color: Colours.light_yellow,
     },
     menuStyle: {
         backgroundColor: Colours.dark_yellow,

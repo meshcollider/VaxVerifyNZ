@@ -48,7 +48,7 @@ export default function ScannerScreen({ navigation }) {
                         visible={menuVisible}
                         anchor={
                             <TouchableOpacity onPress={showMenu} style={Styles.touchableButton}>
-                                <Text style={Styles.buttonLabel}>
+                                <Text style={Styles.touchableButtonLabel}>
                                     <MaterialCommunityIcons size={30} name="dots-vertical" />
                                 </Text>
                             </TouchableOpacity>
