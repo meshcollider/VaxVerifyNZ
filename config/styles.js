@@ -4,9 +4,20 @@ export default {
     container: {
         flex: 1,
         justifyContent: 'center',
+        alignItems: 'center',
     },
     text: {
         textAlign: 'center',
+        width: '90%',
+    },
+    title: {
+        fontSize: 20,
+        fontWeight: 'bold',
+    },
+    separator: {
+        marginVertical: 30,
+        height: 1,
+        width: '80%',
     },
     buttonContainer: {
         alignSelf: 'flex-end',
