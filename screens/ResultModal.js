@@ -1,11 +1,5 @@
 import * as React from 'react'
-import {
-    StyleSheet,
-    Text,
-    View,
-    ActivityIndicator,
-    TouchableOpacity,
-} from 'react-native'
+import { StyleSheet, Text, View, ActivityIndicator, TouchableOpacity } from 'react-native'
 import AppLoading from 'expo-app-loading'
 import { MaterialIcons, MaterialCommunityIcons } from '@expo/vector-icons'
 
@@ -80,7 +74,7 @@ export default function ResultModal({ route, navigation }) {
         return (
             <View style={Styles.badgeContainer}>
                 <View>
-                <View style={Styles.errorBadge}>
+                    <View style={Styles.errorBadge}>
                         <Text style={Styles.errorBadgeText}>
                             <MaterialCommunityIcons
                                 size={30}

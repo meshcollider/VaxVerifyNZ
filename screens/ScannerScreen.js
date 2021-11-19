@@ -152,7 +152,10 @@ export default function ScannerScreen({ navigation }) {
                         anchor={
                             <TouchableOpacity onPress={showMenu} style={Styles.touchableButton}>
                                 <Text style={Styles.touchableButtonLabel}>
-                                    <MaterialIcons size={30} name={menuVisible ? "expand-less" : "expand-more"} />
+                                    <MaterialIcons
+                                        size={30}
+                                        name={menuVisible ? 'expand-less' : 'expand-more'}
+                                    />
                                 </Text>
                             </TouchableOpacity>
                         }
