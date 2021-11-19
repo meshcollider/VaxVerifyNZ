@@ -23,7 +23,11 @@ export default function App() {
                         options={{ headerShown: false }}
                     />
                     <Stack.Group screenOptions={{ presentation: 'modal' }}>
-                        <Stack.Screen name="About" component={AboutModal} />
+                        <Stack.Screen
+                            name="About"
+                            component={AboutModal}
+                            options={{ headerShown: false }} 
+                        />
                     </Stack.Group>
                     <Stack.Group screenOptions={{ presentation: 'modal' }}>
                         <Stack.Screen name="ScanResult" component={ResultModal} />
