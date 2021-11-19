@@ -9,17 +9,20 @@ import {
     SafeAreaView,
     Text,
     TouchableOpacity,
+    ImageBackground,
 } from 'react-native'
 import { useIsFocused } from '@react-navigation/native'
 import { MaterialIcons, MaterialCommunityIcons } from '@expo/vector-icons'
 import AsyncStorage from '@react-native-async-storage/async-storage'
 import { Menu, MenuItem, MenuDivider } from 'react-native-material-menu'
+import { StatusBar } from 'expo-status-bar'
+import Constants from 'expo-constants'
 
+import Texture from '../assets/images/texture.png'
 import ScanCamera from '../components/Camera'
 import Styles from '../config/styles'
 import Colours from '../config/colours'
 import useFonts from '../config/useFonts'
-import Constants from 'expo-constants'
 
 export default function ScannerScreen({ navigation }) {
     const [aboutVisible, setAboutVisible] = React.useState(false)
@@ -27,6 +30,7 @@ export default function ScannerScreen({ navigation }) {
     const isFocused = useIsFocused()
     const [shouldVibrate, setVibrate] = React.useState(true)
     const [menuVisible, setMenuVisible] = React.useState(false)
+    const vibrationStrength = 40
 
     const LoadFonts = async () => {
         await useFonts()
@@ -42,17 +46,20 @@ export default function ScannerScreen({ navigation }) {
     const toggleVibrate = async () => {
         const newShouldVibrate = !shouldVibrate
         setVibrate(newShouldVibrate)
+        if (!shouldVibrate) Vibration.vibrate(vibrationStrength)
         await AsyncStorage.setItem('@vaxverifynz-vibrate', JSON.stringify(newShouldVibrate))
     }
 
     const hideMenu = () => setMenuVisible(false)
     const showMenu = () => setMenuVisible(true)
     const hideAbout = () => setAboutVisible(false)
-    const showAbout = () => setAboutVisible(true)
+    const showAbout = () => {
+        setAboutVisible(true), setMenuVisible(false)
+    }
 
     const handleBarCodeScanned = ({ type, data }) => {
         if (shouldVibrate) {
-            Vibration.vibrate(200)
+            Vibration.vibrate(vibrationStrength)
         }
         navigation.navigate('ScanResult', { data: data })
     }
@@ -68,7 +75,8 @@ export default function ScannerScreen({ navigation }) {
     }
 
     return (
-        <View style={Styles.container}>
+        <ImageBackground source={Texture} resizeMode="repeat" style={Styles.backgroundContainer}>
+            <StatusBar barStyle="light-content" />
             <Modal
                 animationType="slide"
                 transparent={true}
@@ -180,10 +188,7 @@ export default function ScannerScreen({ navigation }) {
 
                         <MenuDivider color={Colours.light_yellow} />
                         <MenuItem
-                            onPress={() => {
-                                setAboutVisible(true)
-                                hideMenu
-                            }}
+                            onPress={showAbout}
                             textStyle={Styles.menuItemTextStyle}
                             style={Styles.menuItemStyle}
                         >
@@ -194,6 +199,6 @@ export default function ScannerScreen({ navigation }) {
             </SafeAreaView>
 
             {isFocused && <ScanCamera resultHandler={handleBarCodeScanned} />}
-        </View>
+        </ImageBackground>
     )
 }
