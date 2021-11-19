@@ -105,7 +105,6 @@ export default {
         backgroundColor: Colours.dark_yellow,
         borderRadius: 25,
         marginTop: 35,
-        marginLeft: -70,
     },
     menuItemStyle: {
         minWidth: 200,
