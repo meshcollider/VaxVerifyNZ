@@ -4,7 +4,6 @@ import {
     Text,
     View,
     ActivityIndicator,
-    ImageBackground,
     TouchableOpacity,
 } from 'react-native'
 import AppLoading from 'expo-app-loading'
@@ -63,9 +62,9 @@ export default function ResultModal({ route, navigation }) {
 
     if (!processed) {
         return (
-            <ImageBackground source={Texture} resizeMode="repeat" style={Styles.container}>
+            <View style={Styles.badgeContainer}>
                 <ActivityIndicator size="large" />
-            </ImageBackground>
+            </View>
         )
     }
 
@@ -81,8 +80,7 @@ export default function ResultModal({ route, navigation }) {
 
     if (!result.success) {
         return (
-            <ImageBackground source={Texture} resizeMode="repeat" style={Styles.container}>
-                <View>
+                <View style={Styles.badgeContainer}>
                     <View style={Styles.errorBadge}>
                         <Text style={Styles.errorBadgeText}>
                             <MaterialCommunityIcons
@@ -117,14 +115,12 @@ export default function ResultModal({ route, navigation }) {
                         </Text>
                     </TouchableOpacity>
                 </View>
-            </ImageBackground>
         )
     }
 
     const subject = result.credentialSubject
     return (
-        <ImageBackground source={Texture} resizeMode="repeat" style={Styles.container}>
-            <View>
+            <View style={Styles.badgeContainer}>
                 <View style={Styles.successBadge}>
                     <Text style={Styles.successBadgeText}>
                         <MaterialCommunityIcons
@@ -162,6 +158,5 @@ export default function ResultModal({ route, navigation }) {
                     </Text>
                 </TouchableOpacity>
             </View>
-        </ImageBackground>
     )
 }

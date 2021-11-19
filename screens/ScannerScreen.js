@@ -9,7 +9,6 @@ import {
     SafeAreaView,
     Text,
     TouchableOpacity,
-    ImageBackground,
 } from 'react-native'
 import { useIsFocused } from '@react-navigation/native'
 import { MaterialIcons, MaterialCommunityIcons } from '@expo/vector-icons'
@@ -75,7 +74,7 @@ export default function ScannerScreen({ navigation }) {
     }
 
     return (
-        <ImageBackground source={Texture} resizeMode="repeat" style={Styles.backgroundContainer}>
+        <View style={Styles.badgeContainer}>
             <StatusBar barStyle="light-content" />
             <Modal
                 animationType="slide"
@@ -182,6 +181,6 @@ export default function ScannerScreen({ navigation }) {
             </SafeAreaView>
 
             {isFocused && <ScanCamera resultHandler={handleBarCodeScanned} />}
-        </ImageBackground>
+        </View>
     )
 }
