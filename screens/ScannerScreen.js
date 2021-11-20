@@ -159,7 +159,6 @@ export default function ScannerScreen({ navigation }) {
                                 </Text>
                             </TouchableOpacity>
                         </View>
-                        
                     }
                     onRequestClose={hideMenu}
                     style={Styles.menuStyle}
