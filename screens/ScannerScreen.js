@@ -145,12 +145,12 @@ export default function ScannerScreen({ navigation }) {
                 </View>
             </Modal>
             <SafeAreaView style={Styles.settingsBox}>
-                <View style={Styles.settingsButton}>
-                    <Menu
-                        animationDuration={100}
-                        visible={menuVisible}
-                        anchor={
-                            <TouchableOpacity onPress={showMenu} style={Styles.touchableButton}>
+                <Menu
+                    animationDuration={100}
+                    visible={menuVisible}
+                    anchor={
+                        <View style={Styles.settingsButton}>
+                            <TouchableOpacity onPress={showMenu}>
                                 <Text style={Styles.touchableButtonLabel}>
                                     <MaterialIcons
                                         size={30}
@@ -158,28 +158,30 @@ export default function ScannerScreen({ navigation }) {
                                     />
                                 </Text>
                             </TouchableOpacity>
-                        }
-                        onRequestClose={hideMenu}
-                        style={Styles.menuStyle}
+                        </View>
+                        
+                    }
+                    onRequestClose={hideMenu}
+                    style={Styles.menuStyle}
+                >
+                    <MenuItem
+                        onPress={toggleVibrate}
+                        textStyle={Styles.menuItemTextStyle}
+                        style={Styles.menuItemStyle}
                     >
-                        <MenuItem
-                            onPress={toggleVibrate}
-                            textStyle={Styles.menuItemTextStyle}
-                            style={Styles.menuItemStyle}
-                        >
-                            Turn {shouldVibrate ? 'off' : 'on'} vibration
-                        </MenuItem>
+                        Turn {shouldVibrate ? 'off' : 'on'} vibration
+                    </MenuItem>
 
-                        <MenuDivider color={Colours.light_yellow} />
-                        <MenuItem
-                            onPress={showAbout}
-                            textStyle={Styles.menuItemTextStyle}
-                            style={Styles.menuItemStyle}
-                        >
-                            About
-                        </MenuItem>
-                    </Menu>
-                </View>
+                    <MenuDivider color={Colours.light_yellow} />
+                    <MenuItem
+                        onPress={showAbout}
+                        textStyle={Styles.menuItemTextStyle}
+                        style={Styles.menuItemStyle}
+                    >
+                        About
+                    </MenuItem>
+                </Menu>
+                
             </SafeAreaView>
 
             {isFocused && <ScanCamera resultHandler={handleBarCodeScanned} />}
