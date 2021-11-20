@@ -89,7 +89,6 @@ export default {
         alignSelf: 'center',
 
         backgroundColor: Colours.light_yellow,
-        height: 30,
         elevation: 3,
         borderRadius: 100,
         shadowColor: 'black',
