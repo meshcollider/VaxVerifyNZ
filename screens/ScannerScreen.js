@@ -181,7 +181,6 @@ export default function ScannerScreen({ navigation }) {
                         About
                     </MenuItem>
                 </Menu>
-                
             </SafeAreaView>
 
             {isFocused && <ScanCamera resultHandler={handleBarCodeScanned} />}

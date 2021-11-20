@@ -87,7 +87,6 @@ export default {
     },
     settingsButton: {
         alignSelf: 'center',
-
         backgroundColor: Colours.light_yellow,
         elevation: 3,
         borderRadius: 100,
