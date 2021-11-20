@@ -1,5 +1,6 @@
 import Colours from './colours'
 import { Dimensions, StyleSheet } from 'react-native'
+
 export default {
     container: {
         flex: 1,
@@ -77,34 +78,36 @@ export default {
         fontSize: 26,
         lineHeight: 35,
     },
+    settingsBox: {
+        position: 'absolute',
+        top: 60,
+        left: 0,
+        right: 0,
+        zIndex: 3,
+    },
     settingsButton: {
         alignSelf: 'center',
-        position: 'absolute',
-        textAlign: 'center',
+        backgroundColor: Colours.light_yellow,
+        elevation: 3,
         borderRadius: 100,
         shadowColor: 'black',
         shadowRadius: 60,
-        elevation: 3,
-        zIndex: 3,
         shadowOffset: { width: 0, height: 10 },
         shadowOpacity: 1,
-        backgroundColor: Colours.light_yellow,
-    },
-    settingsBox: {
-        top: 60,
-        alignSelf: 'center',
-        position: 'absolute',
-    },
-    touchableButton: {
-        marginHorizontal: 20,
     },
     touchableButtonLabel: {
         color: Colours.dark_yellow,
+        width: 70,
+        textAlign: "center",
     },
     menuStyle: {
         backgroundColor: Colours.dark_yellow,
         borderRadius: 25,
         marginTop: 35,
+
+        // Overrides properties in the Menu Library
+        left: 'auto', 
+        alignSelf: 'center',
     },
     menuItemStyle: {
         minWidth: 200,
