@@ -140,7 +140,7 @@ export default function ScanCamera(props) {
                 ]}
             >
                 <View style={Styles.buttonContainer}>
-                    <TouchableOpacity
+                    { cameraType === Camera.Constants.Type.back && <TouchableOpacity
                         style={[Styles.button]}
                         onPress={() =>
                             setFlashMode(
@@ -161,6 +161,7 @@ export default function ScanCamera(props) {
                             />
                         </Text>
                     </TouchableOpacity>
+                    }
                     <TouchableOpacity
                         style={[Styles.button]}
                         onPress={switchCamera}
