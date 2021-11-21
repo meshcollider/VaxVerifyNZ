@@ -63,6 +63,15 @@ export default function ScanCamera(props) {
         }
     }
 
+    const switchCamera = () => {
+        setCameraType(
+            cameraType === Camera.Constants.Type.back
+                ? Camera.Constants.Type.front
+                : Camera.Constants.Type.back
+        )
+        setIsRatioSet(false)
+    }
+
     React.useEffect(() => {
         ;(async () => {
             const { status } = await Camera.requestCameraPermissionsAsync()
@@ -154,13 +163,7 @@ export default function ScanCamera(props) {
                     </TouchableOpacity>
                     <TouchableOpacity
                         style={[Styles.button]}
-                        onPress={() =>
-                            setCameraType(
-                                cameraType === Camera.Constants.Type.back
-                                    ? Camera.Constants.Type.front
-                                    : Camera.Constants.Type.back
-                            )
-                        }
+                        onPress={switchCamera}
                     >
                         <Text style={Styles.buttonLabel}>
                             <MaterialIcons size={30} name="flip-camera-android" />
