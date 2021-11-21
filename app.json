@@ -2,7 +2,7 @@
     "expo": {
         "name": "VaxVerifyNZ",
         "slug": "VaxVerifyNZ",
-        "version": "1.0.0",
+        "version": "1.0.1",
         "orientation": "portrait",
         "icon": "./assets/images/icon.png",
         "userInterfaceStyle": "automatic",
@@ -18,7 +18,7 @@
         "ios": {
             "supportsTablet": true,
             "bundleIdentifier": "com.meshcollider.vaxverifynz",
-            "buildNumber": "1.0.0"
+            "buildNumber": "1.0.1"
         },
         "android": {
             "adaptiveIcon": {
@@ -26,7 +26,7 @@
                 "backgroundColor": "#ffffff"
             },
             "package": "com.meshcollider.vaxverifynz",
-            "versionCode": 1
+            "versionCode": 2
         },
         "androidNavigationBar": {
             "barStyle": "dark-content",
