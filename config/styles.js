@@ -265,10 +265,15 @@ export default {
         fontSize: 40,
         fontFamily: 'WorkSans_Light',
     },
+    cardSubTitle: {
+        fontFamily: 'WorkSans_Bold',
+        marginTop: 20,
+        fontSize: 30,
+    },
     cardText: {
-        marginTop: 40,
-        fontSize: 20,
+        marginTop: 20,
+        fontSize: 25,
         fontFamily: 'WorkSans_Medium',
-        lineHeight: 28,
+        lineHeight: 33,
     },
 }

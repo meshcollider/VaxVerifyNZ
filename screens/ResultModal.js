@@ -1,7 +1,7 @@
 import * as React from 'react'
 import { Text, View, ActivityIndicator, TouchableOpacity } from 'react-native'
 import AppLoading from 'expo-app-loading'
-import { MaterialCommunityIcons } from '@expo/vector-icons'
+import { MaterialCommunityIcons, MaterialIcons } from '@expo/vector-icons'
 
 import '../config/polyfills'
 import Styles from '../config/styles'
@@ -78,9 +78,9 @@ export default function ResultModal({ route, navigation }) {
                             <MaterialCommunityIcons
                                 size={30}
                                 style={Styles.errorBadgeText}
-                                name="eye"
+                                name="alert-circle-outline"
                             />{' '}
-                            Scan Complete
+                            INVALID
                         </Text>
                     </View>
                     <View style={Styles.errorCardBack}>
@@ -120,21 +120,20 @@ export default function ResultModal({ route, navigation }) {
                         <MaterialCommunityIcons
                             size={30}
                             style={Styles.successBadgeText}
-                            name="eye"
+                            name="check-circle-outline"
                         />{' '}
-                        Scan Complete
+                        VALID
                     </Text>
                 </View>
                 <View style={Styles.cardBack}>
                     <View style={Styles.card}>
-                        <Text style={Styles.cardTitle}>NZ Covid Pass</Text>
-                        <Text style={Styles.cardText} adjustsFontSizeToFit numberOfLines={6}>
-                            {<Text style={Styles.bold}>Name:</Text>}
-                            {'\n'}
+                        <Text style={Styles.cardSubTitle}>Name:</Text>
+                        <Text style={Styles.cardText} adjustsFontSizeToFit numberOfLines={3}>
                             {subject.givenName} {subject.familyName}
-                            {'\n'}
-                            {'\n'}
-                            {<Text style={Styles.bold}>Date of Birth:</Text>} {subject.dob}
+                        </Text>
+                        <Text style={Styles.cardSubTitle}>Date of Birth:</Text>
+                        <Text style={Styles.cardText}>
+                            {subject.dob}
                         </Text>
                     </View>
                 </View>
