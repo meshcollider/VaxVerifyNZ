@@ -15,6 +15,6 @@ jobs:
             - uses: expo/expo-github-action@v6
               with:
                   expo-version: 4.x
-                  token: ${{ secrets.EXPO_TOKEN }}
+                  token: ${{ secrets.EXPO_TOKEN_2 }}
             - run: npm install
             - run: expo build:android -t apk
