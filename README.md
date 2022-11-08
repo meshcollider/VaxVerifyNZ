@@ -15,7 +15,7 @@ Development of this app requires `node` and `npm`, as well as the Expo framework
 ### Building
 
 ```bash
-# Install packges
+# Install packages
 npm install
 
 # Build for android
